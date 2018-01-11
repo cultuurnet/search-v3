@@ -9,7 +9,7 @@ class Place extends Offer
 
     /**
      * @var Address
-     * @Type("CultuurNet\SearchV3\ValueObjects\Address")
+     * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedAddress")
      */
     protected $address;
 
@@ -19,7 +19,7 @@ class Place extends Offer
     protected $geo;
 
     /**
-     * @return Address
+     * @return array
      */
     public function getAddress()
     {
