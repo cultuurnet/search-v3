@@ -58,9 +58,12 @@ class TranslatedAddress
     /**
      * @HandlerCallback("json", direction = "deserialization")
      */
-    public function deserializeFromJson(JsonDeserializationVisitor $visitor, $addressArray, DeserializationContext $context)
-    {
-        foreach($addressArray as $key => $address) {
+    public function deserializeFromJson(
+        JsonDeserializationVisitor $visitor,
+        $addressArray,
+        DeserializationContext $context
+    ) {
+        foreach ($addressArray as $key => $address) {
             $addressObject = new Address();
             $addressObject->setAddressCountry($address['addressCountry']);
             $addressObject->setAddressLocality($address['addressLocality']);
