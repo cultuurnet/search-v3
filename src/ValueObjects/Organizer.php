@@ -34,6 +34,12 @@ class Organizer
     protected $hiddenLabels;
 
     /**
+     * @var ContactPoint
+     * @Type("CultuurNet\SearchV3\ValueObjects\ContactPoint")
+     */
+    protected $contactPoint;
+
+    /**
      * @return string
      */
     public function getId()
@@ -114,6 +120,25 @@ class Organizer
     public function setHiddenLabels($hiddenLabels)
     {
         $this->hiddenLabels = $hiddenLabels;
+
+        return $this;
+    }
+
+    /**
+     * @return ContactPoint
+     */
+    public function getContactPoint()
+    {
+        return $this->contactPoint;
+    }
+
+    /**
+     * @param ContactPoint $contactPoint
+     * @return Organizer
+     */
+    public function setContactPoint(ContactPoint $contactPoint)
+    {
+        $this->contactPoint = $contactPoint;
 
         return $this;
     }

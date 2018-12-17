@@ -2,6 +2,7 @@
 
 namespace CultuurNet\SearchV3\Test\ValueObjects;
 
+use CultuurNet\SearchV3\ValueObjects\ContactPoint;
 use CultuurNet\SearchV3\ValueObjects\Organizer;
 use CultuurNet\SearchV3\ValueObjects\TranslatedString;
 
@@ -54,5 +55,23 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->organizer->getHiddenLabels();
         $this->assertEquals(array('hidden1', 'hidden2'), $result);
+    }
+
+    public function testGetContactPointMehtod()
+    {
+        $expectedContactPoint = array(
+            'email' => array('info@mail.com'),
+            'phone' => array('0123456789'),
+            'url' => array('http://test-url.com')
+        );
+
+        $contactPoint = new ContactPoint();
+        $contactPoint->setEmails(['info@mail.com']);
+        $contactPoint->setPhoneNumbers(['0123456789']);
+        $contactPoint->setUrls(['http://test-url.com']);
+        $this->organizer->setContactPoint($contactPoint);
+
+        $result = $this->organizer->getContactPoint();
+        $this->assertEquals($expectedContactPoint, $contactPoint);
     }
 }
