@@ -59,11 +59,10 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContactPointMehtod()
     {
-        $expectedContactPoint = array(
-            'email' => array('info@mail.com'),
-            'phone' => array('0123456789'),
-            'url' => array('http://test-url.com')
-        );
+        $expectedContactPoint = new ContactPoint();
+        $expectedContactPoint->setEmails(['info@mail.com']);
+        $expectedContactPoint->setPhoneNumbers(['0123456789']);
+        $expectedContactPoint->setUrls(['http://test-url.com']);
 
         $contactPoint = new ContactPoint();
         $contactPoint->setEmails(['info@mail.com']);
@@ -72,6 +71,6 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
         $this->organizer->setContactPoint($contactPoint);
 
         $result = $this->organizer->getContactPoint();
-        $this->assertEquals($expectedContactPoint, $contactPoint);
+        $this->assertEquals($expectedContactPoint, $result);
     }
 }
