@@ -280,8 +280,8 @@ final class SerializerTest extends TestCase
         $location->setWorkflowStatus('APPROVED');
 
         $geoPoint = new GeoPoint();
-        $geoPoint->setLatitude('50.8299134');
-        $geoPoint->setLongitude('4.3434589');
+        $geoPoint->setLatitude(50.8299134);
+        $geoPoint->setLongitude(4.3434589);
         $location->setGeo($geoPoint);
 
         $event->setLocation($location);

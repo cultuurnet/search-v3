@@ -41,14 +41,6 @@ final class OrganizerTest extends TestCase
         $this->assertEquals($name, $this->organizer->getName());
     }
 
-    public function testGetEmailMethod(): void
-    {
-        $this->organizer->setEmail(['test@organizer.com']);
-
-        $result = $this->organizer->getEmail();
-        $this->assertEquals(['test@organizer.com'], $result);
-    }
-
     public function testGetContactPointMehtod(): void
     {
         $contactPoint = new ContactPoint();

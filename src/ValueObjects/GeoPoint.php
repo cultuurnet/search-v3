@@ -25,7 +25,7 @@ final class GeoPoint
         return $this->latitude;
     }
 
-    public function setLatitude(string $latitude): void
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -35,7 +35,7 @@ final class GeoPoint
         return $this->longitude;
     }
 
-    public function setLongitude(string $longitude): void
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
