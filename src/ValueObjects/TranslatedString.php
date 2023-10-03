@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\Annotation\HandlerCallback;
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
-
 final class TranslatedString
 {
     /**
@@ -38,17 +34,5 @@ final class TranslatedString
     public function setValues(array $values): void
     {
         $this->values = $values;
-    }
-
-    /**
-     * @HandlerCallback("json", direction = "deserialization")
-     */
-    public function deserializeFromJson(
-        JsonDeserializationVisitor $visitor,
-        $value,
-        DeserializationContext $context
-    ): void {
-        // Some properties are not translated yet in the api. Force them as nl.
-        $this->values = is_array($value) ? $value : ['nl' => $value];
     }
 }

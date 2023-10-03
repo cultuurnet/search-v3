@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
+use CultuurNet\SearchV3\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
 final class TranslatedStringTest extends TestCase
@@ -34,18 +33,16 @@ final class TranslatedStringTest extends TestCase
      */
     public function testDeserializeMethod(): void
     {
-        /** @var JsonDeserializationVisitor $visitor */
-        $visitor = $this->createMock(JsonDeserializationVisitor::class);
+        $serializer = new Serializer();
 
-        /** @var DeserializationContext $context */
-        $context = $this->createMock(DeserializationContext::class);
+        $testString = '"value"';
+        $result = $serializer->deserialize($testString, TranslatedString::class);
 
-        $string = new TranslatedString();
-        $string->deserializeFromJson($visitor, 'value', $context);
-        $this->assertEquals(['nl' => 'value'], $string->getValues());
+        $this->assertEquals(['nl' => 'value'], $result->getValues());
 
-        $string = new TranslatedString();
-        $string->deserializeFromJson($visitor, ['test1', 'test2'], $context);
-        $this->assertEquals(['test1', 'test2'], $string->getValues());
+        $testString = '{"test1":"test2"}';
+        $result = $serializer->deserialize($testString, TranslatedString::class);
+
+        $this->assertEquals(['test1' => 'test2'], $result ->getValues());
     }
 }

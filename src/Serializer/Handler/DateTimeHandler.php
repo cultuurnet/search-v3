@@ -5,11 +5,24 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3\Serializer\Handler;
 
 use DateTime;
-use JMS\Serializer\Handler\DateHandler;
+use JMS\Serializer\GraphNavigator;
+use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonDeserializationVisitor;
 
-final class DateTimeHandler extends DateHandler
+final class DateTimeHandler implements SubscribingHandlerInterface
 {
+    public static function getSubscribingMethods(): array
+    {
+        return [
+            [
+                'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
+                'format' => 'json',
+                'type' => DateTime::class,
+                'method' => 'deserializeDateTimeFromJson',
+            ],
+        ];
+    }
+
     public function deserializeDateTimeFromJson(JsonDeserializationVisitor $visitor, $data, array $type): ?DateTime
     {
         if ((string)$data === '') {
@@ -17,9 +30,9 @@ final class DateTimeHandler extends DateHandler
         }
 
         if (substr($data, -1) === 'Z') {
-            $type['params'][0] = 'Y-m-d\TH:i:s.u\Z';
+            return DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $data);
         }
 
-        return parent::deserializeDateTimeFromJson($visitor, $data, $type);
+        return new DateTime($data);
     }
 }

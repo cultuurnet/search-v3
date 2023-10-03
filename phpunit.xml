@@ -1,14 +1,18 @@
-<phpunit bootstrap="test/bootstrap.php" colors="true">
-    <testsuite name="all">
-        <directory>test</directory>
-    </testsuite>
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-        <log type="coverage-html" target="build/logs/coverage"/>
-    </logging>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="test/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <coverage>
+    <report>
+      <clover outputFile="build/logs/clover.xml"/>
+      <html outputDirectory="build/logs/coverage"/>
+    </report>
+  </coverage>
+  <testsuite name="all">
+    <directory>test</directory>
+  </testsuite>
+  <logging/>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </source>
 </phpunit>

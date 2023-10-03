@@ -8,6 +8,7 @@ use CultuurNet\SearchV3\Serializer\SerializerInterface;
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -63,9 +64,19 @@ final class SearchClientTest extends TestCase
         $response = $this->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        /** @var Stream|MockObject $stream */
+        $stream = $this->getMockBuilder(Stream::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $stream->expects($this->once())
+            ->method('getContents')
+            ->willReturn('test response');
+
         $response->expects($this->once())
             ->method('getBody')
-            ->willReturn('test response');
+            ->willReturn($stream);
 
         return $response;
     }

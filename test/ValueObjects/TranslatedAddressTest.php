@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
+use CultuurNet\SearchV3\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
 final class TranslatedAddressTest extends TestCase
@@ -26,18 +25,6 @@ final class TranslatedAddressTest extends TestCase
 
         $searchResult = json_decode(file_get_contents(__DIR__ . '/data/searchResult.json'), true);
         $this->addressValues = $searchResult['location']['address'];
-    }
-
-    public function deserializeAddress(): void
-    {
-        /** @var JsonDeserializationVisitor $visitor */
-        $visitor = $this->createMock(JsonDeserializationVisitor::class);
-
-        /** @var DeserializationContext $context */
-        $context = $this->createMock(DeserializationContext::class);
-
-
-        $this->address->deserializeFromJson($visitor, $this->addressValues, $context);
     }
 
     public function testGetAddressesMethod(): void
@@ -72,7 +59,9 @@ final class TranslatedAddressTest extends TestCase
 
     public function testDeserializeAddress(): void
     {
-        $this->deserializeAddress();
+        $serializer = new Serializer();
+        $jsonString = json_encode($this->addressValues);
+        $this->address = $serializer->deserialize($jsonString, TranslatedAddress::class);
 
         $resultNl = $this->address->getAddressForLanguage('nl');
         $resultEn = $this->address->getAddressForLanguage('en');

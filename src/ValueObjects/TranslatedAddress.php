@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\Annotation\HandlerCallback;
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
-
 final class TranslatedAddress
 {
     /**
@@ -31,38 +27,15 @@ final class TranslatedAddress
         $this->addresses = $addresses;
     }
 
+    public function addAddress(string $key, Address $address): void
+    {
+        if (!isset($this->addresses[$key])) {
+            $this->addresses[$key] = $address;
+        }
+    }
+
     public function getAddressForLanguage(string $langcode): ?Address
     {
         return $this->addresses[$langcode] ?? null;
-    }
-
-    /**
-     * @HandlerCallback("json", direction = "deserialization")
-     */
-    public function deserializeFromJson(
-        JsonDeserializationVisitor $visitor,
-        array $values,
-        DeserializationContext $context
-    ): void {
-        foreach ($values as $key => $value) {
-            if (is_array($value)) {
-                $this->addresses[$key] = new Address(
-                    $value['addressCountry'],
-                    $value['addressLocality'],
-                    $value['postalCode'],
-                    $value['streetAddress']
-                );
-            }
-        }
-
-        // Some properties are not translated yet in the api. We save these as nl.
-        if (empty($this->addresses) && !empty($values)) {
-            $this->addresses['nl'] = new Address(
-                $values['addressCountry'] ?? null,
-                $values['addressLocality'] ?? null,
-                $values['postalCode'] ?? null,
-                $values['streetAddress'] ?? null
-            );
-        }
     }
 }
