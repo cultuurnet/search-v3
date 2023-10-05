@@ -14,11 +14,13 @@ final class Collection
     private $contextMapping = [
         '/contexts/event' => Event::class,
         '/contexts/place' => Place::class,
+        '/contexts/organizer' => Organizer::class,
     ];
 
     private $typeMapping = [
         'Event' => Event::class,
         'Place' => Place::class,
+        'Organizer' => Organizer::class,
     ];
 
     private $items = [];

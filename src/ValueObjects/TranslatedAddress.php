@@ -7,6 +7,8 @@ namespace CultuurNet\SearchV3\ValueObjects;
 use JMS\Serializer\Annotation\HandlerCallback;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
+use JMS\Serializer\JsonSerializationVisitor;
+use JMS\Serializer\SerializationContext;
 
 final class TranslatedAddress
 {
@@ -29,6 +31,15 @@ final class TranslatedAddress
     public function setAddresses(array $addresses): void
     {
         $this->addresses = $addresses;
+    }
+
+    /**
+    * @param string $langcode
+    * @param Address $address
+    */
+    public function setAddress(string $langcode, Address $address): void
+    {
+      $this->addresses[$langcode] = $address;
     }
 
     public function getAddressForLanguage(string $langcode): ?Address
@@ -64,5 +75,12 @@ final class TranslatedAddress
                 $values['streetAddress'] ?? null
             );
         }
+    }
+
+    /**
+     * @HandlerCallback("json", direction = "serialization")
+     */
+    public function serializeFromObject(JsonSerializationVisitor $visitor, array $type = NULL, SerializationContext $context): array {
+      return $visitor->visitArray($this->addresses, [], $context);
     }
 }

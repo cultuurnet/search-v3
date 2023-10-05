@@ -51,6 +51,11 @@ final class SearchClient implements SearchClientInterface
         return $this->search($searchQuery, 'offers');
     }
 
+    public function searchOrganizers(SearchQueryInterface $searchQuery): PagedCollection
+    {
+        return $this->search($searchQuery, 'organizers');
+    }
+
     private function search(SearchQueryInterface $searchQuery, $type): PagedCollection
     {
         $options = [
@@ -58,7 +63,6 @@ final class SearchClient implements SearchClientInterface
         ];
 
         $result = $this->client->request('GET', $type, $options);
-
         return $this->serializer->deserialize((string) $result->getBody());
     }
 }

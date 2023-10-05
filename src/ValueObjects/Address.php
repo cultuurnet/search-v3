@@ -38,7 +38,7 @@ final class Address
         $this->streetAddress = $streetAddress;
     }
 
-    public function getAddressCountry(): string
+    public function getAddressCountry(): ?string
     {
         return $this->addressCountry;
     }
@@ -48,7 +48,7 @@ final class Address
         $this->addressCountry = $addressCountry;
     }
 
-    public function getAddressLocality(): string
+    public function getAddressLocality(): ?string
     {
         return $this->addressLocality;
     }
@@ -58,7 +58,7 @@ final class Address
         $this->addressLocality = $addressLocality;
     }
 
-    public function getPostalCode(): string
+    public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
@@ -68,7 +68,7 @@ final class Address
         $this->postalCode = $postalCode;
     }
 
-    public function getStreetAddress(): string
+    public function getStreetAddress(): ?string
     {
         return $this->streetAddress;
     }

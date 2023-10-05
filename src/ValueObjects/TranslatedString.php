@@ -7,6 +7,8 @@ namespace CultuurNet\SearchV3\ValueObjects;
 use JMS\Serializer\Annotation\HandlerCallback;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
+use JMS\Serializer\JsonSerializationVisitor;
+use JMS\Serializer\SerializationContext;
 
 final class TranslatedString
 {
@@ -27,9 +29,11 @@ final class TranslatedString
         return $this->values[$langcode] ?? '';
     }
 
-    /**
-     * @return string[]
-     */
+    public function setValueForLanguage(string $langcode, string $value): void
+    {
+        $this->values[$langcode] = $value;
+    }
+
     public function getValues(): array
     {
         return $this->values;
@@ -50,5 +54,12 @@ final class TranslatedString
     ): void {
         // Some properties are not translated yet in the api. Force them as nl.
         $this->values = is_array($value) ? $value : ['nl' => $value];
+    }
+
+    /**
+     * @HandlerCallback("json", direction = "serialization")
+     */
+    public function serializeFromObject(JsonSerializationVisitor $visitor, array $values = NULL, SerializationContext $context): array {
+      return $this->values ?? [];
     }
 }
