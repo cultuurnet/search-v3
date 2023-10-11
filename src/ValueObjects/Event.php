@@ -112,4 +112,19 @@ final class Event extends Offer
     {
         $this->onlineUrl = $onlineUrl;
     }
+
+    public function isAttendanceModeOnline(): bool
+    {
+        return null !== $this->getAttendanceMode() && $this->getAttendanceMode() === 'online';
+    }
+
+    public function isAttendanceModeOffline(): bool
+    {
+        return null !== $this->getAttendanceMode() && $this->getAttendanceMode() === 'offline';
+    }
+
+    public function isAttendanceModeMixed(): bool
+    {
+        return null !== $this->getAttendanceMode() && $this->getAttendanceMode() === 'mixed';
+    }
 }

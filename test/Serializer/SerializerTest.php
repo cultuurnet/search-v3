@@ -291,10 +291,25 @@ final class SerializerTest extends TestCase
         $organizer->setName(new TranslatedString([
             'nl' => 'Constant vzw',
         ]));
+        $organizer->setMainLanguage('nl');
+        $organizer->setLanguages(['nl']);
+        $organizer->setCompletedLanguages(['nl']);
+        $organizer->setUrl('http://constantvzw.org');
+        $organizer->setCreator('618d65f9-641c-4697-8fd8-436dabaebd2e');
+        $organizer->setWorkflowStatus('ACTIVE');
+        $organizer->setCreated(new \DateTime('2018-05-09T12:32:39+00:00'));
+        $organizer->setModified(new \DateTime('2018-05-09T12:32:39+00:00'));
 
         $organizerContactPoint = new ContactPoint();
         $organizerContactPoint->setEmails(['info@constantvzw.org']);
         $organizer->setContactPoint($organizerContactPoint);
+
+        $organizerAddresses = new TranslatedAddress();
+        $organizerAddresses->setAddresses([
+          'nl' => $addressNl,
+          'fr' => $addressFr,
+        ]);
+        $organizer->setAddress($organizerAddresses);
 
         $event->setOrganizer($organizer);
 

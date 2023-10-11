@@ -23,9 +23,11 @@ final class TranslatedString
         return $this->values[$langcode] ?? '';
     }
 
-    /**
-     * @return string[]
-     */
+    public function setValueForLanguage(string $langcode, string $value): void
+    {
+        $this->values[$langcode] = $value;
+    }
+
     public function getValues(): array
     {
         return $this->values;

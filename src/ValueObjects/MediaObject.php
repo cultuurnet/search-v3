@@ -19,6 +19,13 @@ final class MediaObject
     /**
      * @var string|null
      * @Type("string")
+     * @SerializedName("id")
+     */
+    private $uuid;
+
+    /**
+     * @var string|null
+     * @Type("string")
      */
     private $contentUrl;
 
@@ -40,6 +47,18 @@ final class MediaObject
      */
     private $copyrightHolder;
 
+    /**
+     * @var string|null
+     * @Type("string")
+     */
+    private $inLanguage;
+
+    /**
+     * @var string|null
+     * @Type("string")
+     */
+    private $language;
+
     public function getId(): string
     {
         return $this->id;
@@ -48,6 +67,16 @@ final class MediaObject
     public function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?string $uuid): void
+    {
+        $this->uuid = $uuid;
     }
 
     public function getContentUrl(): ?string
@@ -88,5 +117,16 @@ final class MediaObject
     public function setCopyrightHolder(string $copyrightHolder): void
     {
         $this->copyrightHolder = $copyrightHolder;
+    }
+
+    public function setLanguage(string $language): void
+    {
+        $this->language = $language;
+        $this->inLanguage = $language;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language ?? $this->inLanguage;
     }
 }
