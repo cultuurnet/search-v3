@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
+use CultuurNet\SearchV3\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
 final class FacetResultsTest extends TestCase
@@ -19,22 +18,12 @@ final class FacetResultsTest extends TestCase
 
     public function setUp(): void
     {
-        $this->facetResults = new FacetResults();
-        $this->facetJson = json_decode(file_get_contents(__DIR__ . '/data/facetResults.json'), true);
+        $this->facetJson = file_get_contents(__DIR__ . '/data/facetResults.json');
+        $serializer = new Serializer();
+        $this->facetResults = $serializer->deserialize($this->facetJson, FacetResults::class);
     }
 
-    public function deserializeEverything(): void
-    {
-        /** @var JsonDeserializationVisitor $visitor */
-        $visitor = $this->createMock(JsonDeserializationVisitor::class);
-
-        /** @var DeserializationContext $context */
-        $context = $this->createMock(DeserializationContext::class);
-
-        $this->facetResults->deserializeFromJson($visitor, $this->facetJson, $context);
-    }
-
-    public function deserializeFacilitiesTestData($results): array
+    private function deserializeFacilitiesTestData(array $results): array
     {
         $items = [];
         foreach ($results as $value => $result) {
@@ -47,17 +36,16 @@ final class FacetResultsTest extends TestCase
 
     public function testGetFacetResultsMethod(): void
     {
-        $this->facetResults->setFacetResults($this->facetJson);
         $result = $this->facetResults->getFacetResults();
-        $this->assertEquals($result, $this->facetJson);
+
+        $this->assertIsArray($result);
+        $this->assertCount(2, $result);
     }
 
     public function testGetFacetResultsByFieldMethod(): void
     {
-        $this->deserializeEverything();
-
         $facilities = json_decode(file_get_contents(__DIR__ . '/data/facetResultsFacilities.json'), true);
-        $facilitiesTestData[] = new FacetResult('facilities', $this->deserializeFacilitiesTestData($facilities));
+        $facilitiesTestData = [new FacetResult('facilities', $this->deserializeFacilitiesTestData($facilities))];
 
         $result = $this->facetResults->getFacetResultsByField('facilities');
 

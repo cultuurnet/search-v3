@@ -2,4 +2,6 @@ vendor
 build
 coverage
 composer.lock
-/.php_cs.cache
+.php-cs-fixer.cache
+.idea
+.phpunit.cache/

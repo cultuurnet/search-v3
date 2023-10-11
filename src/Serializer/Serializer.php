@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3\Serializer;
 
 use CultuurNet\SearchV3\Serializer\Handler\CalendarSummaryHandler;
+use CultuurNet\SearchV3\Serializer\Handler\CollectionHandler;
 use CultuurNet\SearchV3\Serializer\Handler\DateTimeHandler;
+use CultuurNet\SearchV3\Serializer\Handler\FacetResultsHandler;
+use CultuurNet\SearchV3\Serializer\Handler\TranslatedAddressHandler;
+use CultuurNet\SearchV3\Serializer\Handler\TranslatedStringHandler;
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
@@ -32,35 +35,32 @@ final class Serializer implements SerializerInterface
             ->setAnnotationReader(new AnnotationReader())
             ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
             ->configureHandlers(function (HandlerRegistry $registry) {
-                $registry->registerSubscribingHandler(new DateTimeHandler());
                 $registry->registerSubscribingHandler(new CalendarSummaryHandler());
+                $registry->registerSubscribingHandler(new CollectionHandler());
+                $registry->registerSubscribingHandler(new DateTimeHandler());
+                $registry->registerSubscribingHandler(new FacetResultsHandler());
+                $registry->registerSubscribingHandler(new TranslatedStringHandler());
+                $registry->registerSubscribingHandler(new TranslatedAddressHandler());
             })
             ->build();
     }
 
-    public function setSerializer(JMSSerializerInterface $serializer)
+    public function setSerializer(JMSSerializerInterface $serializer): void
     {
         $this->serializer = $serializer;
     }
 
-    public function serialize($object)
+    public function serialize($object): string
     {
         $serializationContext = SerializationContext::create()
             ->setSerializeNull(true);
 
-        // Register doctrine annotations loader.
-        AnnotationRegistry::registerLoader('class_exists');
-
         return $this->serializer->serialize($object, 'json', $serializationContext);
     }
 
-    public function deserialize(string $jsonString, string $class = PagedCollection::class)
+    public function deserialize(string $jsonString, string $class = PagedCollection::class): mixed
     {
-        $deserializationContext = DeserializationContext::create()
-            ->setSerializeNull(true);
-
-        // Register doctrine annotations loader.
-        AnnotationRegistry::registerLoader('class_exists');
+        $deserializationContext = DeserializationContext::create();
 
         return $this->serializer->deserialize($jsonString, $class, 'json', $deserializationContext);
     }
