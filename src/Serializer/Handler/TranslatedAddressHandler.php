@@ -43,7 +43,7 @@ final class TranslatedAddressHandler implements SubscribingHandlerInterface
         }
 
         // Some properties are not translated yet in the api. We save these as nl.
-        if (empty($this->addresses) && !empty($values)) {
+        if (!empty($values)) {
             $address = new Address(
                 $values['addressCountry'] ?? null,
                 $values['addressLocality'] ?? null,
