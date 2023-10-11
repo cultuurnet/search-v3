@@ -7,6 +7,7 @@ namespace CultuurNet\SearchV3\Serializer\Handler;
 use CultuurNet\SearchV3\Serializer\Serializer;
 use CultuurNet\SearchV3\ValueObjects\Collection;
 use CultuurNet\SearchV3\ValueObjects\Event;
+use CultuurNet\SearchV3\ValueObjects\Organizer;
 use CultuurNet\SearchV3\ValueObjects\Place;
 use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigator;
@@ -18,11 +19,13 @@ final class CollectionHandler implements SubscribingHandlerInterface
     private $contextMapping = [
         '/contexts/event' => Event::class,
         '/contexts/place' => Place::class,
+        '/contexts/organizer' => Organizer::class,
     ];
 
     private $typeMapping = [
         'Event' => Event::class,
         'Place' => Place::class,
+        'Organizer' => Organizer::class,
     ];
 
     public static function getSubscribingMethods(): array

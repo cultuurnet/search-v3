@@ -18,4 +18,6 @@ interface SearchClientInterface
     public function searchPlaces(SearchQueryInterface $searchQuery): PagedCollection;
 
     public function searchOffers(SearchQueryInterface $searchQuery): PagedCollection;
+
+    public function searchOrganizers(SearchQueryInterface $searchQuery): PagedCollection;
 }

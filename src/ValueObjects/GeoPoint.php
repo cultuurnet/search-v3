@@ -10,13 +10,13 @@ final class GeoPoint
 {
     /**
      * @var float|null
-     * @Type("string")
+     * @Type("float")
      */
     private $latitude;
 
     /**
      * @var float|null
-     * @Type("string")
+     * @Type("float")
      */
     private $longitude;
 
