@@ -9,33 +9,33 @@ use JMS\Serializer\Annotation\Type;
 final class GeoPoint
 {
     /**
-     * @var string|null
+     * @var float|null
      * @Type("string")
      */
     private $latitude;
 
     /**
-     * @var string|null
+     * @var float|null
      * @Type("string")
      */
     private $longitude;
 
-    public function getLatitude(): ?string
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function setLatitude(string $latitude): void
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
 
-    public function getLongitude(): ?string
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    public function setLongitude(string $longitude): void
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
