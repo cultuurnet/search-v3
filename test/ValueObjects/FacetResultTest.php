@@ -1,25 +1,26 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\FacetResult;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class FacetResultTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class FacetResultTest extends TestCase
 {
     /**
      * @var FacetResult
      */
     protected $facetResult;
 
-    public function setUp()
+    public function setUp(): void
     {
         $field = 'facet result field';
-        $results = $this->getMockBuilder('\FacetResultItem')
-            ->getMock();
-        $this->facetResult = new FacetResult($field, $results);
+        $results = new FacetResultItem('foo', new TranslatedString(['nl' => 'Foo']), 0, []);
+        $this->facetResult = new FacetResult($field, [$results]);
     }
 
-    public function testGetFieldMethod()
+    public function testGetFieldMethod(): void
     {
         $this->facetResult->setField('new facet result field');
 
@@ -27,13 +28,12 @@ class FacetResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('new facet result field', $result);
     }
 
-    public function testGetResultsMethod()
+    public function testGetResultsMethod(): void
     {
-        $newResults = $this->getMockBuilder('\FacetResultItem')
-            ->getMock();
-        $this->facetResult->setResults($newResults);
+        $newResults = new FacetResultItem('foobar', new TranslatedString(['nl' => 'Foobar']), 10, []);
+        $this->facetResult->setResults([$newResults]);
 
         $result = $this->facetResult->getResults();
-        $this->assertEquals($newResults, $result);
+        $this->assertEquals([$newResults], $result);
     }
 }

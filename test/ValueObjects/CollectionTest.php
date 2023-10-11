@@ -1,24 +1,26 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\Collection;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class CollectionTest extends TestCase
 {
     /**
      * @var Collection
      */
     protected $collection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->collection = new Collection();
     }
 
-    public function testGetItemsMethod()
+    public function testGetItemsMethod(): void
     {
-        $items = array('item1', 'item2', 'item3');
+        $items = ['item1', 'item2', 'item3'];
         $this->collection->setItems($items);
 
         $result = $this->collection->getItems();

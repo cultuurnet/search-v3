@@ -1,0 +1,28 @@
+{
+  "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+  "@type": "PagedCollection",
+  "itemsPerPage": 5,
+  "totalItems": 32449,
+  "member": [
+    {
+      "@id": "https://io.uitdatabank.be/event/cec57058-0acd-4ff8-a9a7-f3097e8d74e3",
+      "@type": "Event"
+    },
+    {
+      "@id": "https://io.uitdatabank.be/event/efc98e66-f6e0-45ec-93c0-a690928ee356",
+      "@type": "Event"
+    },
+    {
+      "@id": "https://io.uitdatabank.be/event/ec8e6497-bbb6-481d-aee9-57ccdcf87b7e",
+      "@type": "Event"
+    },
+    {
+      "@id": "https://io.uitdatabank.be/event/a9588da5-2543-48fe-9528-f4d2ec43c411",
+      "@type": "Event"
+    },
+    {
+      "@id": "https://io.uitdatabank.be/event/33a90c9c-ecd3-483d-b655-120771be5774",
+      "@type": "Event"
+    }
+  ]
+}

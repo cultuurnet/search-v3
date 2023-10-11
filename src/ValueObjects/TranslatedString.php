@@ -1,55 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use JMS\Serializer\Annotation\HandlerCallback;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
-use JMS\Serializer\Annotation\HandlerCallback;
+use JMS\Serializer\JsonSerializationVisitor;
+use JMS\Serializer\SerializationContext;
 
-/**
- * Provides a value object for translated strings like name and description.
- */
-class TranslatedString
+final class TranslatedString
 {
-
     /**
      * Translations
      *
-     * @var array
+     * @var string[]
      */
-    protected $values = [];
+    private $values;
 
-    /**
-     * TranslatedString constructor.
-     * @param array $values
-     */
     public function __construct(array $values = [])
     {
         $this->values = $values;
     }
 
-    /**
-     * Get the value for a given langcode.
-     *
-     * @param string $langcode
-     */
-    public function getValueForLanguage(string $langcode)
+    public function getValueForLanguage(string $langcode): string
     {
         return $this->values[$langcode] ?? '';
     }
 
-    /**
-     * Get the translations array.
-     */
-    public function getValues()
+    public function setValueForLanguage(string $langcode, string $value): void
+    {
+        $this->values[$langcode] = $value;
+    }
+
+    public function getValues(): array
     {
         return $this->values;
     }
 
-    /**
-     * Set the translations array.
-     */
-    public function setValues(array $values)
+    public function setValues(array $values): void
     {
         $this->values = $values;
     }
@@ -57,9 +47,19 @@ class TranslatedString
     /**
      * @HandlerCallback("json", direction = "deserialization")
      */
-    public function deserializeFromJson(JsonDeserializationVisitor $visitor, $value, DeserializationContext $context)
-    {
+    public function deserializeFromJson(
+        JsonDeserializationVisitor $visitor,
+        $value,
+        DeserializationContext $context
+    ): void {
         // Some properties are not translated yet in the api. Force them as nl.
         $this->values = is_array($value) ? $value : ['nl' => $value];
+    }
+
+    /**
+     * @HandlerCallback("json", direction = "serialization")
+     */
+    public function serializeFromObject(JsonSerializationVisitor $visitor, array $values = NULL, SerializationContext $context): array {
+      return $this->values ?? [];
     }
 }

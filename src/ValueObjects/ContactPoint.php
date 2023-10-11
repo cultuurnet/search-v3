@@ -1,88 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
 
-/**
- * Value object for contact point information
- */
-class ContactPoint
+final class ContactPoint
 {
-
     /**
      * @var array
      * @Type("array<string>")
      * @SerializedName("email")
      */
-    protected $emails = [];
+    private $emails = [];
 
     /**
      * @var array
      * @Type("array<string>")
      * @SerializedName("phone")
      */
-    protected $phoneNumbers = [];
+    private $phoneNumbers = [];
 
     /**
      * @var array
      * @Type("array<string>")
      * @SerializedName("url")
      */
-    protected $urls = [];
+    private $urls = [];
 
-    /**
-     * @return array
-     */
-    public function getEmails()
+    public function getEmails(): array
     {
         return $this->emails;
     }
 
-    /**
-     * @param array $emails
-     * @return ContactPoint
-     */
-    public function setEmails($emails)
+    public function setEmails(array $emails): void
     {
         $this->emails = $emails;
-        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getPhoneNumbers()
+    public function getPhoneNumbers(): array
     {
         return $this->phoneNumbers;
     }
 
-    /**
-     * @param array $phoneNumbers
-     * @return ContactPoint
-     */
-    public function setPhoneNumbers($phoneNumbers)
+    public function setPhoneNumbers(array $phoneNumbers): void
     {
         $this->phoneNumbers = $phoneNumbers;
-        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getUrls()
+    public function getUrls(): array
     {
         return $this->urls;
     }
 
-    /**
-     * @param array $urls
-     * @return ContactPoint
-     */
-    public function setUrls($urls)
+    public function setUrls(array $urls): void
     {
         $this->urls = $urls;
-        return $this;
     }
 }

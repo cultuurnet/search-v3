@@ -1,23 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on calendar type.
- */
-class CalendarType extends AbstractParameter
+final class CalendarType extends AbstractParameter
 {
+    public const TYPE_SINGLE = 'single';
+    public const TYPE_MULTIPLE = 'multiple';
+    public const TYPE_PERIODIC = 'periodic';
+    public const TYPE_PERMANENT = 'permanent';
 
-    const TYPE_SINGLE = 'single';
-    const TYPE_MULTIPLE = 'multiple';
-    const TYPE_PERIODIC = 'periodic';
-    const TYPE_PERMANENT = 'permanent';
-
-    /**
-     * Calendar type constructor.
-     * @param $type
-     */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->value = $type;
         $this->key = 'calendarType';

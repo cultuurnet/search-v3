@@ -1,46 +1,48 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use JMS\Serializer\Annotation\HandlerCallback;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\TypeParser;
-use JMS\Serializer\Annotation\HandlerCallback;
 
-class Collection
+final class Collection
 {
-
-    protected $contextMapping = [
+    private $contextMapping = [
         '/contexts/event' => Event::class,
         '/contexts/place' => Place::class,
+        '/contexts/organizer' => Organizer::class,
     ];
 
-    protected $items = [];
+    private $typeMapping = [
+        'Event' => Event::class,
+        'Place' => Place::class,
+        'Organizer' => Organizer::class,
+    ];
 
-    /**
-     * @return array
-     */
-    public function getItems()
+    private $items = [];
+
+    public function getItems(): array
     {
         return $this->items;
     }
 
-    /**
-     * @param array $items
-     * @return Collection
-     */
-    public function setItems($items)
+    public function setItems(array $items): void
     {
         $this->items = $items;
-
-        return $this;
     }
 
     /**
      * @HandlerCallback("json", direction = "deserialization")
      */
-    public function deserializeFromJson(JsonDeserializationVisitor $visitor, $values, DeserializationContext $context)
-    {
+    public function deserializeFromJson(
+        JsonDeserializationVisitor $visitor,
+        array $values,
+        DeserializationContext $context
+    ): void {
         $deserializationContext = DeserializationContext::create()
             ->setSerializeNull(true);
 
@@ -56,30 +58,33 @@ class Collection
         $typeParser = new TypeParser();
         $metadata = [];
         foreach ($values as $member) {
-            // If context is given, we have a full entity.
+            if (!isset($member['@context']) && !isset($member['@type'])) {
+                continue;
+            }
+
             if (isset($member['@context'])) {
                 $class = $this->contextMapping[$member['@context']];
-                $metadata[$class] = $metadata[$class] ??
-                    $deserializationContext->getMetadataFactory()->getMetadataForClass($class);
-
-                $object = new $class();
-                $memberVisitor->startVisitingObject(
-                    $metadata[$class],
-                    $object,
-                    $typeParser->parse($class),
-                    $deserializationContext
-                );
-
-                $properties = $metadata[$class]->propertyMetadata;
-                foreach ($properties as $property) {
-                    $memberVisitor->visitProperty($property, $member, $deserializationContext);
-                }
-
-                $this->items[] = $object;
             } else {
-                // If not, we only have id + type. Just copy the array.
-                $this->items[] = $member;
+                $class = $this->typeMapping[$member['@type']];
             }
+
+            $metadata[$class] = $metadata[$class] ??
+                $deserializationContext->getMetadataFactory()->getMetadataForClass($class);
+
+            $object = new $class();
+            $memberVisitor->startVisitingObject(
+                $metadata[$class],
+                $object,
+                $typeParser->parse($class),
+                $deserializationContext
+            );
+
+            $properties = $metadata[$class]->propertyMetadata;
+            foreach ($properties as $property) {
+                $memberVisitor->visitProperty($property, $member, $deserializationContext);
+            }
+
+            $this->items[] = $object;
         }
     }
 }

@@ -5,12 +5,8 @@
   "license": "Apache-2.0",
   "authors": [
     {
-      "name": "Nils Destoop",
-      "email": "nils.destoop@wunderkraut.com"
-    },
-    {
-      "name": "Stijn Swaanen",
-      "email": "stijn.swaanen@publiq.be"
+      "name": "publiq vzw",
+      "email": "info@publiq.be"
     }
   ],
   "minimum-stability": "dev",
@@ -20,20 +16,32 @@
       "CultuurNet\\SearchV3\\": "src"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "CultuurNet\\SearchV3\\": "test"
+    }
+  },
   "require": {
     "php": "^7.1",
     "guzzlehttp/guzzle": "~6.0",
     "jms/serializer": "~1.9",
     "simple-bus/jms-serializer-bridge": "^1.0",
-    "indigophp/doctrine-annotation-autoload": "^0.1.0",
-    "jwage/purl": "^0.0.10"
+    "yogarine/doctrine-annotation-autoload": "^0.3.0"
   },
   "require-dev": {
-    "escapestudios/symfony2-coding-standard": "~2.0",
-    "phpunit/phpunit": "~5.7",
-    "squizlabs/php_codesniffer": "2.6.1",
-    "phing/phing": "~2.10",
-    "satooshi/php-coveralls": "~0.7",
-    "mikey179/vfsstream": "~1.6.2"
+    "phpunit/phpunit": "~7.5",
+    "publiq/php-cs-fixer-config": "^1.3",
+    "phpstan/phpstan": "^0.12.80"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "phpstan": "vendor/bin/phpstan analyse",
+    "cs": "php-cs-fixer fix -v --diff --dry-run",
+    "cs-fix": "php-cs-fixer fix -v --diff",
+    "ci": [
+      "composer cs",
+      "composer phpstan",
+      "composer test"
+    ]
   }
 }

@@ -1,107 +1,74 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
 
-/**
- * Value object for price information
- */
-class PriceInfo
+final class PriceInfo
 {
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $category;
+    private $category;
 
     /**
-     * @var TranslatedString
+     * @var TranslatedString|null
      * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedString")
      */
-    protected $name;
+    private $name;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $priceCurrency;
+    private $priceCurrency;
 
     /**
-     * @var float
+     * @var float|null
      * @Type("float")
      */
-    protected $price;
+    private $price;
 
-    /**
-     * @return string
-     */
-    public function getCategory()
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    /**
-     * @param string $category
-     * @return PriceInfo
-     */
-    public function setCategory($category)
+    public function setCategory(string $category): void
     {
         $this->category = $category;
-        return $this;
     }
 
-    /**
-     * @return TranslatedString
-     */
-    public function getName()
+    public function getName(): ?TranslatedString
     {
         return $this->name;
     }
 
-   /**
-    * @param TranslatedString $name
-    * @return PriceInfo
-    */
-    public function setName($name)
+    public function setName(TranslatedString $name): void
     {
         $this->name = $name;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPriceCurrency()
+    public function getPriceCurrency(): ?string
     {
         return $this->priceCurrency;
     }
 
-    /**
-     * @param string $priceCurrency
-     * @return PriceInfo
-     */
-    public function setPriceCurrency($priceCurrency)
+    public function setPriceCurrency(string $priceCurrency): void
     {
         $this->priceCurrency = $priceCurrency;
-        return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    /**
-     * @param float $price
-     * @return PriceInfo
-     */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
-        return $this;
     }
 }

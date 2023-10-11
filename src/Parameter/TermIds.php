@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on term ids.
- */
-class TermIds extends AbstractParameter
+final class TermIds extends AbstractParameter
 {
-
-    /**
-     * TermIds constructor.
-     * @param $termId string
-     */
-    public function __construct($termId)
+    public function __construct(string $termId)
     {
         $this->value = $termId;
         $this->key = 'termIds';
+    }
+
+    public function allowsMultiple(): bool
+    {
+        return true;
     }
 }

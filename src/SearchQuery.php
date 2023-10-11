@@ -1,70 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3;
 
-use Guzzle\Http\Client;
-use CultureFeed_HttpClient;
-use CultureFeed_HttpResponse;
-use CultureFeed_DefaultHttpClient;
-use Exception;
-use Guzzle\Http\ClientInterface;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\Message\EntityEnclosingRequestInterface;
-use Guzzle\Service\Builder\ServiceBuilderInterface;
+use CultuurNet\SearchV3\Parameter\Query;
 
-class SearchQuery implements SearchQueryInterface
+final class SearchQuery implements SearchQueryInterface
 {
-
     /**
      * @var ParameterInterface[]
      */
-    protected $parameters = [];
+    private $parameters = [];
 
     /**
      * @var array
      */
-    protected $sorting = [];
+    private $sorting = [];
 
     /**
      * Return the full embedded search results, or only the ids.
      * @var bool
      */
-    protected $embed = false;
+    private $embed;
 
     /**
      * The number of results to skip (defaults to 0).
-     * @var int
+     * @var int|null
      */
-    protected $start = false;
+    private $start;
 
     /**
      * The number of results to return in a single page (defaults to 30).
-     * @var int
+     * @var int|null
      */
-    protected $limit = false;
+    private $limit;
 
-    /**
-     * SearchQuery constructor.
-     * @param bool $embed
-     *   Return fully embedded entities, or only an array of results.
-     */
     public function __construct(bool $embed = false)
     {
         $this->embed = $embed;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addParameter(ParameterInterface $parameter)
+    public function addParameter(ParameterInterface $parameter): void
     {
         $this->parameters[] = $parameter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeParameter(ParameterInterface $parameter)
+    public function removeParameter(ParameterInterface $parameter): void
     {
         foreach ($this->parameters as $i => $param) {
             if ($param === $parameter) {
@@ -74,92 +56,73 @@ class SearchQuery implements SearchQueryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ParameterInterface[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addSort(string $field, string $direction)
+    public function addSort(string $field, string $direction): void
     {
         $this->sorting[$field] = $direction;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeSort(string $field)
+    public function removeSort(string $field): void
     {
         unset($this->sorting[$field]);
     }
 
-    /**
-     * Set the embed mode.
-     * @param bool $embed
-     */
-    public function setEmbed(bool $embed)
+    public function setEmbed(bool $embed): void
     {
         $this->embed = true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSort()
+    public function getSort(): array
     {
         return $this->sorting;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setStart(int $start)
+    public function setStart(int $start): void
     {
         $this->start = $start;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setLimit(int $limit)
+    public function setLimit(int $limit): void
     {
         $this->limit = $limit;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray()
+    public function toArray(): array
     {
-
         $query = [];
-        $duplicateKeys = [];
+        $advancedQueries = [];
+
         foreach ($this->parameters as $parameter) {
             $key = $parameter->getKey();
 
-            // Same query key is used multiple times? Merge it into 1 query.
+            if ($parameter instanceof Query) {
+                $advancedQueries[] = $parameter->getValue();
+                continue;
+            }
+
             if (isset($query[$key])) {
-                // "facets", "regions" and "termIds" is allowed as array.
-                if (in_array($key, ['facets', 'regions', 'termIds', 'labels'])) {
+                if ($parameter->allowsMultiple()) {
                     $query[$key] = is_array($query[$key]) ? $query[$key] : [$query[$key]];
                     $query[$key][] = $parameter->getValue();
-                } else {
-                    $duplicateKeys[$key][] = $parameter->getValue();
                 }
-            } else {
-                $query[$key] = $parameter->getValue();
+                continue;
             }
+
+            $query[$key] = $parameter->getValue();
         }
 
-        // Merge the duplicate keys into the main query.
-        foreach ($duplicateKeys as $key => $duplicateKeyValues) {
-            // Copy the value that already exists in the query, to the duplicate array.
-            $duplicateKeyValues[] = $query[$key];
-            $query[$key] = '(' . implode(') AND (', $duplicateKeyValues) . ')';
+        if (!empty($advancedQueries)) {
+            if (count($advancedQueries) === 1) {
+                $query['q'] = $advancedQueries[0];
+            } else {
+                $query['q'] = '(' . implode(') AND (', $advancedQueries) . ')';
+            }
         }
 
         if (!empty($this->sorting)) {
@@ -170,21 +133,18 @@ class SearchQuery implements SearchQueryInterface
             $query['embed'] = true;
         }
 
-        if ($this->start) {
+        if (!is_null($this->start)) {
             $query['start'] = $this->start;
         }
 
-        if ($this->limit) {
+        if (!is_null($this->limit)) {
             $query['limit'] = $this->limit;
         }
 
         return $query;
     }
 
-    /**
-     * Print the query as a querystring.
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $query = $this->toArray();
 

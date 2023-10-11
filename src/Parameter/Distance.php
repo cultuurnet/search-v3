@@ -1,43 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on distance.
- */
-class Distance extends AbstractParameter
+use InvalidArgumentException;
+use ReflectionClass;
+
+final class Distance extends AbstractParameter
 {
+    public const UNIT_MILE = 'mi';
+    public const UNIT_YARD = 'yd';
+    public const UNIT_FEET = 'ft';
+    public const UNIT_INCH = 'in';
+    public const UNIT_KILOMETER = 'km';
+    public const UNIT_METER = 'm';
+    public const UNIT_CENTIMETER = 'cm';
+    public const UNIT_MILLIMETER = 'mm';
+    public const UNIT_NAUTICAL_MILE = 'nmi';
 
-    const UNIT_MILE = 'mi';
-    const UNIT_YARD = 'yd';
-    const UNIT_FEET = 'ft';
-    const UNIT_INCH = 'in';
-    const UNIT_KILOMETER = 'km';
-    const UNIT_METER = 'm';
-    const UNIT_CENTIMETER = 'cm';
-    const UNIT_MILLIMETER = 'mm';
-    const UNIT_NAUTICAL_MILE = 'nmi';
-
-    /**
-     * Distance constructor.
-     * @param $distance integer
-     * @param $unit
-     *
-     * @throws \Exception when the unit is not a constant of the class.
-     */
-    public function __construct($distance, $unit)
+    public function __construct(int $distance, string $unit)
     {
-        if (in_array($unit, self::getConstants())) {
+        if (in_array($unit, self::getConstants(), true)) {
             $this->value = $distance . $unit;
             $this->key = 'distance';
         } else {
-            throw new \Exception('Invalid unit parameter for '.__CLASS__.' constructor', 400);
+            throw new InvalidArgumentException('Invalid unit parameter for ' . __CLASS__ . ' constructor', 400);
         }
     }
 
-    protected static function getConstants()
+    /**
+     * @return string[]
+     */
+    private static function getConstants(): array
     {
-        $oClass = new \ReflectionClass(__CLASS__);
+        $oClass = new ReflectionClass(__CLASS__);
         return $oClass->getConstants();
     }
 }

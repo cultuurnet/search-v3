@@ -1,18 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-class Facet extends AbstractParameter
+final class Facet extends AbstractParameter
 {
-
-    /**
-     * Facet constructor.
-     * @param $facetType
-     *   Type of facets to request.
-     */
-    public function __construct($facetType)
+    public function __construct(string $facetType)
     {
         $this->key = 'facets';
         $this->value = $facetType;
+    }
+
+    public function allowsMultiple(): bool
+    {
+        return true;
     }
 }

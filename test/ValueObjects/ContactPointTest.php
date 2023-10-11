@@ -1,42 +1,44 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\ContactPoint;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class ContactPointTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class ContactPointTest extends TestCase
 {
     /**
      * @var ContactPoint
      */
     protected $contactPoint;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->contactPoint = new ContactPoint();
     }
 
-    public function testGetEmailsMethod()
+    public function testGetEmailsMethod(): void
     {
-        $emails = array('email1@gmail.com', 'email2@gmail.com');
+        $emails = ['email1@gmail.com', 'email2@gmail.com'];
         $this->contactPoint->setEmails($emails);
 
         $result = $this->contactPoint->getEmails();
         $this->assertEquals($emails, $result);
     }
 
-    public function testGetPhoneNumbersMethod()
+    public function testGetPhoneNumbersMethod(): void
     {
-        $phones = array('1234567890', '0987654321');
+        $phones = ['1234567890', '0987654321'];
         $this->contactPoint->setPhoneNumbers($phones);
 
         $result = $this->contactPoint->getPhoneNumbers();
         $this->assertEquals($phones, $result);
     }
 
-    public function testGetUrlsMethod()
+    public function testGetUrlsMethod(): void
     {
-        $urls = array('http://google.com', 'http://yahoo.com');
+        $urls = ['http://google.com', 'http://yahoo.com'];
         $this->contactPoint->setUrls($urls);
 
         $result = $this->contactPoint->getUrls();

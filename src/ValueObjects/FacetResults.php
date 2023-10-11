@@ -1,116 +1,92 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use JMS\Serializer\Annotation\HandlerCallback;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\JsonDeserializationVisitor;
-use JMS\Serializer\TypeParser;
-use JMS\Serializer\Annotation\HandlerCallback;
 
-class FacetResults implements \Iterator
+final class FacetResults implements \Iterator
 {
-
-    protected $key;
+    /**
+     * @var FacetResult[]
+     */
+    private $facetResults = [];
 
     /**
-     * @var array
+     * @return FacetResult[]
      */
-    protected $facetResults;
-
-    /**
-     * @return array
-     */
-    public function getFacetResults()
+    public function getFacetResults(): array
     {
         return $this->facetResults;
     }
 
     /**
-     * @param array $facetResults
-     * @return FacetResults
+     * @param FacetResult[] $facetResults
      */
-    public function setFacetResults($facetResults)
+    public function setFacetResults(array $facetResults): void
     {
         $this->facetResults = $facetResults;
-
-        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getFacetResultsByField($field)
+    public function getFacetResultsByField($field): array
     {
         $results = [];
         foreach ($this->facetResults as $facetResult) {
-            if ($facetResult->getField() == $field) {
+            if ($facetResult->getField() === $field) {
                 $results[] = $facetResult;
             }
         }
         return $results;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function current()
+    public function current(): FacetResult
     {
         return current($this->facetResults);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function next()
+    public function next(): void
     {
-        return next($this->facetResults);
+        next($this->facetResults);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function key()
     {
         return key($this->facetResults);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function valid()
+    public function valid(): bool
     {
         return key($this->facetResults) !== null;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function rewind()
+    public function rewind(): void
     {
-        return reset($this->facetResults);
+        reset($this->facetResults);
     }
 
     /**
      * @HandlerCallback("json", direction = "deserialization")
      */
-    public function deserializeFromJson(JsonDeserializationVisitor $visitor, $values, DeserializationContext $context)
-    {
+    public function deserializeFromJson(
+        JsonDeserializationVisitor $visitor,
+        array $values,
+        DeserializationContext $context
+    ): void {
         foreach ($values as $facet_type => $results) {
             $this->facetResults[$facet_type] = new FacetResult($facet_type, $this->deserializeResults($results));
         }
     }
 
-    /**
-     *
-     */
-    protected function deserializeResults($results)
+    private function deserializeResults($results): array
     {
         $items = [];
         foreach ($results as $value => $result) {
             $children = isset($result['children']) ? $this->deserializeResults($result['children']) : [];
             $items[] = new FacetResultItem($value, new TranslatedString($result['name']), $result['count'], $children);
         }
-
         return $items;
     }
 }

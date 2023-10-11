@@ -1,0 +1,25 @@
+{
+  "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+  "@type": "PagedCollection",
+  "itemsPerPage": 1,
+  "totalItems": 4,
+  "member": [
+    {
+      "@id": "https://io.uitdatabank.be/event/7438ac58-fb2b-4ddc-bbda-d2d3d61681c5",
+      "@context": "/contexts/event",
+      "calendarSummary": "van x tot y"
+    }
+  ],
+  "facet": {
+    "regions": {
+      "nis-01000": {
+        "name": {
+          "nl": "Brussels Hoofdstedelijk Gewest",
+          "fr": "Région de Bruxelles-Capitale",
+          "de": "Region Brüssel-Hauptstadt"
+        },
+        "count": 4
+      }
+    }
+  }
+}

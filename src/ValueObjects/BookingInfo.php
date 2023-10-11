@@ -1,156 +1,107 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 
-/**
- * Provides a booking info value object.
- */
-class BookingInfo
+final class BookingInfo
 {
-
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $phone;
+    private $phone;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $email;
+    private $email;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $url;
+    private $url;
 
     /**
-     * @var TranslatedString
+     * @var TranslatedString|null
      * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedString")
      */
-    protected $urlLabel;
+    private $urlLabel;
 
     /**
-     * @var \DateTime
+     * @var DateTime|null
      * @Type("DateTime")
      */
-    protected $availabilityStarts;
+    private $availabilityStarts;
 
     /**
-     * @var \DateTime
+     * @var DateTime|null
      * @Type("DateTime")
      */
-    protected $availabilityEnds;
+    private $availabilityEnds;
 
-    /**
-     * @return string
-     */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     * @return BookingInfo
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return BookingInfo
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     * @return BookingInfo
-     */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
-        return $this;
     }
 
-    /**
-     * @return TranslatedString
-     */
-    public function getUrlLabel()
+    public function getUrlLabel(): ?TranslatedString
     {
         return $this->urlLabel;
     }
 
-    /**
-     * @param TranslatedString $urlLabel
-     * @return BookingInfo
-     */
-    public function setUrlLabel($urlLabel)
+    public function setUrlLabel(TranslatedString $urlLabel): void
     {
         $this->urlLabel = $urlLabel;
-        return $this;
     }
 
-    /**
-    * @return \DateTime
-    */
-    public function getAvailabilityStarts()
+    public function getAvailabilityStarts(): ?DateTime
     {
         return $this->availabilityStarts;
     }
 
-    /**
-    * @param \DateTime $availabilityStarts
-    * @return BookingInfo
-    */
-    public function setAvailabilityStarts($availabilityStarts)
+    public function setAvailabilityStarts(DateTime $availabilityStarts): void
     {
         $this->availabilityStarts = $availabilityStarts;
-        return $this;
     }
 
-    /**
-    * @return \DateTime
-    */
-    public function getAvailabilityEnds()
+    public function getAvailabilityEnds(): ?DateTime
     {
         return $this->availabilityEnds;
     }
 
-    /**
-    * @param \DateTime $availabilityEnds
-    * @return BookingInfo
-    */
-    public function setAvailabilityEnds($availabilityEnds)
+    public function setAvailabilityEnds(DateTime $availabilityEnds): void
     {
         $this->availabilityEnds = $availabilityEnds;
-        return $this;
     }
 }

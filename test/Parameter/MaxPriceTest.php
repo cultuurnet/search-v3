@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\MaxPrice;
+namespace CultuurNet\SearchV3\Parameter;
 
-class MaxPriceTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class MaxPriceTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
-        $price = new maxPrice(19.99);
+        $price = new MaxPrice(19.99);
 
         $key = $price->getKey();
         $value = $price->getValue();
 
-        $this->assertEquals($key, 'maxPrice');
-        $this->assertEquals($value, 19.99);
+        $this->assertEquals('maxPrice', $key);
+        $this->assertEquals(19.99, $value);
     }
 }

@@ -1,23 +1,24 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\PriceInfo;
-use CultuurNet\SearchV3\ValueObjects\TranslatedString;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class PriceInfoTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class PriceInfoTest extends TestCase
 {
     /**
      * @var PriceInfo
      */
     protected $priceInfo;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->priceInfo = new priceInfo();
+        $this->priceInfo = new PriceInfo();
     }
 
-    public function testGetCategoryMethod()
+    public function testGetCategoryMethod(): void
     {
         $this->priceInfo->setCategory('base');
 
@@ -25,7 +26,7 @@ class PriceInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('base', $result);
     }
 
-    public function testGetNameMethod()
+    public function testGetNameMethod(): void
     {
         $priceName = new TranslatedString(['nl' => 'Senioren']);
         $this->priceInfo->setName($priceName);
@@ -35,7 +36,7 @@ class PriceInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($priceName, $result);
     }
 
-    public function testGetPriceCurrency()
+    public function testGetPriceCurrency(): void
     {
         $this->priceInfo->setPriceCurrency('euro');
 
@@ -43,7 +44,7 @@ class PriceInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('euro', $result);
     }
 
-    public function testGetPriceMethod()
+    public function testGetPriceMethod(): void
     {
         $this->priceInfo->setPrice(23.45);
 

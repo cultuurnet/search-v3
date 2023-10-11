@@ -1,42 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
-class Address
+final class Address
 {
+    /**
+     * @var string
+     */
+    private $addressCountry;
 
     /**
      * @var string
      */
-    protected $addressCountry;
+    private $addressLocality;
 
     /**
      * @var string
      */
-    protected $addressLocality;
+    private $postalCode;
 
     /**
      * @var string
      */
-    protected $postalCode;
+    private $streetAddress;
 
-    /**
-     * @var string
-     */
-    protected $streetAddress;
-
-    /**
-     * Address constructor.
-     * @param string $addressCountry
-     * @param string $addressLocality
-     * @param string $postalCode
-     * @param string $streetAddress
-     */
     public function __construct(
-        $addressCountry = null,
-        $addressLocality = null,
-        $postalCode = null,
-        $streetAddress = null
+        ?string $addressCountry = null,
+        ?string $addressLocality = null,
+        ?string $postalCode = null,
+        ?string $streetAddress = null
     ) {
         $this->addressCountry = $addressCountry;
         $this->addressLocality = $addressLocality;
@@ -44,80 +38,43 @@ class Address
         $this->streetAddress = $streetAddress;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getAddressCountry()
+    public function getAddressCountry(): ?string
     {
         return $this->addressCountry;
     }
 
-    /**
-     * @param string $addressCountry
-     * @return Address
-     */
-    public function setAddressCountry($addressCountry)
+    public function setAddressCountry(string $addressCountry): void
     {
         $this->addressCountry = $addressCountry;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLocality()
+    public function getAddressLocality(): ?string
     {
         return $this->addressLocality;
     }
 
-    /**
-     * @param string $addressLocality
-     * @return Address
-     */
-    public function setAddressLocality($addressLocality)
+    public function setAddressLocality(string $addressLocality): void
     {
         $this->addressLocality = $addressLocality;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
 
-    /**
-     * @param string $postalCode
-     * @return Address
-     */
-    public function setPostalCode($postalCode)
+    public function setPostalCode(string $postalCode): void
     {
         $this->postalCode = $postalCode;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStreetAddress()
+    public function getStreetAddress(): ?string
     {
         return $this->streetAddress;
     }
 
-    /**
-     * @param string $streetAddress
-     * @return Address
-     */
-    public function setStreetAddress($streetAddress)
+    public function setStreetAddress(string $streetAddress): void
     {
         $this->streetAddress = $streetAddress;
-
-        return $this;
     }
 }

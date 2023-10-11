@@ -1,60 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
 
-/**
- * Geopoint class.
- */
-class GeoPoint
+final class GeoPoint
 {
+    /**
+     * @var float|null
+     * @Type("float")
+     */
+    private $latitude;
 
     /**
-     * @var string
-     * @Type("string")
+     * @var float|null
+     * @Type("float")
      */
-    protected $latitude;
+    private $longitude;
 
-    /**
-     * @var string
-     * @Type("string")
-     */
-    protected $longitude;
-
-    /**
-     * @return string
-     */
-    public function getLatitude()
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    /**
-     * @param string $latitude
-     * @return GeoPoint
-     */
-    public function setLatitude($latitude)
+    public function setLatitude(string $latitude): void
     {
         $this->latitude = $latitude;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLongitude()
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    /**
-     * @param string $longitude
-     * @return GeoPoint
-     */
-    public function setLongitude($longitude)
+    public function setLongitude(string $longitude): void
     {
         $this->longitude = $longitude;
-        return $this;
     }
 }

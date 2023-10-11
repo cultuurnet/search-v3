@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\MediaObject;
+namespace CultuurNet\SearchV3\Parameter;
 
-class MediaObjectTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class MediaObjectTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $mediaObject = new MediaObject(true);
 
         $key = $mediaObject->getKey();
         $value = $mediaObject->getValue();
 
-        $this->assertEquals($key, 'hasMediaObject');
+        $this->assertEquals('hasMediaObjects', $key);
         $this->assertTrue($value);
     }
 }

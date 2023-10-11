@@ -1,123 +1,80 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use CultuurNet\SearchV3\Hydrator\Event;
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\HandlerCallback;
-use JMS\Serializer\TypeParser;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
 
-/**
- * PagedCollection class for a lists of items.
- */
-class PagedCollection
+final class PagedCollection
 {
-
     /**
      * Total items per page
-     * @var int
+     * @var int|null
      * @Type("integer")
      */
-    protected $itemsPerPage;
+    private $itemsPerPage;
 
     /**
      * Total items found.
-     * @var int
+     * @var int|null
      * @Type("integer")
      */
-    protected $totalItems;
+    private $totalItems;
 
     /**
      * All members of this collection result.
-     * @var Collection
+     * @var Collection|null
      * @Type("CultuurNet\SearchV3\ValueObjects\Collection")
      */
-    protected $member;
+    private $member;
 
     /**
      * All facets for this paged collection.
-     *
+     * @var FacetResults|null
      * @Type("CultuurNet\SearchV3\ValueObjects\FacetResults")
      * @SerializedName("facet")
      */
-    protected $facets;
+    private $facets;
 
-    /**
-     * @return int
-     */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): ?int
     {
         return $this->itemsPerPage;
     }
 
-    /**
-     * @param int $itemsPerPage
-     * @return PagedCollection
-     */
-    public function setItemsPerPage($itemsPerPage)
+    public function setItemsPerPage(int $itemsPerPage): void
     {
         $this->itemsPerPage = $itemsPerPage;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotalItems()
+    public function getTotalItems(): ?int
     {
         return $this->totalItems;
     }
 
-    /**
-     * @param int $totalItems
-     * @return PagedCollection
-     */
-    public function setTotalItems($totalItems)
+    public function setTotalItems(int $totalItems): void
     {
         $this->totalItems = $totalItems;
-
-        return $this;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getMember()
+    public function getMember(): ?Collection
     {
         return $this->member;
     }
 
-    /**
-     * @param Collection $member
-     * @return PagedCollection
-     */
-    public function setMember($member)
+    public function setMember(Collection $member): void
     {
         $this->member = $member;
-
-        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFacets()
+    public function getFacets(): ?FacetResults
     {
         return $this->facets;
     }
 
-    /**
-     * @param mixed $facets
-     * @return PagedCollection
-     */
-    public function setFacets($facets)
+    public function setFacets(FacetResults $facets): void
     {
         $this->facets = $facets;
-
-        return $this;
     }
 }

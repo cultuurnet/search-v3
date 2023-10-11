@@ -1,18 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides the parameter class to add advanced queries.
- */
-class Query extends AbstractParameter
+final class Query extends AbstractParameter
 {
-
-    /**
-     * Query constructor.
-     * @param $value
-     */
-    public function __construct($value)
+    public function __construct(string $value)
     {
         $this->value = $value;
         $this->key = 'q';

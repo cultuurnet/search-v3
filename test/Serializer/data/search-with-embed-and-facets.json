@@ -1,0 +1,284 @@
+{
+  "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+  "@type": "PagedCollection",
+  "itemsPerPage": 1,
+  "totalItems": 4,
+  "member": [
+    {
+      "@id": "https://io.uitdatabank.be/event/7438ac58-fb2b-4ddc-bbda-d2d3d61681c5",
+      "@context": "/contexts/event",
+      "mainLanguage": "fr",
+      "name": {
+        "fr": "Le sanglier et le papillon - La mue",
+        "nl": "Het zwijn en de vlinder - De rui"
+      },
+      "location": {
+        "@type": "Place",
+        "@id": "https://io.uitdatabank.be/place/295d19f2-eb53-4d3d-a4a8-11aaaf058094",
+        "@context": "/contexts/place",
+        "mainLanguage": "nl",
+        "name": {
+          "nl": "Constant vzw",
+          "fr": "Constant asbl",
+          "en": "Constant"
+        },
+        "address": {
+          "nl": {
+            "addressCountry": "BE",
+            "addressLocality": "Sint-Gillis",
+            "postalCode": "1060",
+            "streetAddress": "Fortstraat 5"
+          },
+          "fr": {
+            "addressCountry": "BE",
+            "addressLocality": "Saint-Gilles",
+            "postalCode": "1060",
+            "streetAddress": "Rue du Fort 5"
+          }
+        },
+        "calendarType": "permanent",
+        "availableTo": "2100-01-01T00:00:00+00:00",
+        "terms": [
+          {
+            "id": "0.8.0.0.0",
+            "label": "Openbare ruimte",
+            "domain": "eventtype"
+          }
+        ],
+        "created": "2019-09-05T08:49:01+00:00",
+        "modified": "2019-09-05T08:50:49+00:00",
+        "creator": "fce2528e-473f-4c4a-9d71-bb02249872a1",
+        "workflowStatus": "APPROVED",
+        "languages": [
+          "nl",
+          "fr",
+          "en"
+        ],
+        "completedLanguages": [
+          "nl",
+          "fr"
+        ],
+        "availableFrom": "2013-10-19T01:19:59+02:00",
+        "geo": {
+          "latitude": 50.8299134,
+          "longitude": 4.3434589
+        },
+        "status": {
+          "type": "Available"
+        }
+      },
+      "calendarType": "multiple",
+      "startDate": "2021-01-21T23:00:00+00:00",
+      "endDate": "2021-03-04T22:59:59+00:00",
+      "attendanceMode": "mixed",
+      "onlineUrl": "https://www.livestream.be/",
+      "status": {
+        "type": "Available",
+        "reason": {
+          "nl": "Nederlandse reden",
+          "en": "English reason"
+        }
+      },
+      "subEvent": [
+        {
+          "status": {
+            "type": "Available"
+          },
+          "startDate": "2021-01-21T23:00:00+00:00",
+          "endDate": "2021-01-22T22:59:59+00:00",
+          "@type": "Event"
+        },
+        {
+          "status": {
+            "type": "Unavailable",
+            "reason": {
+              "nl": "Nederlandse reden",
+              "en": "English reason"
+            }
+          },
+          "startDate": "2021-03-03T23:00:00+00:00",
+          "endDate": "2021-03-04T22:59:59+00:00",
+          "@type": "Event"
+        }
+      ],
+      "availableTo": "2021-03-04T22:59:59+00:00",
+      "calendarSummary": {
+        "nl": {
+          "text": {
+            "xs": "nl-text-xs",
+            "md": "nl-text-md"
+          },
+          "html": {
+            "sm": "nl-html-sm"
+          }
+        },
+        "fr": {
+          "text": {
+            "lg": "fr-text-lg"
+          },
+          "html": {
+            "sm": "fr-html-sm"
+          }
+        },
+        "de": {
+          "text": {
+            "md": "de-text-md"
+          }
+        },
+        "en": {
+          "text": {
+            "md": "en-text-md"
+          }
+        }
+      },
+      "sameAs": [
+        "http://www.uitinvlaanderen.be/agenda/e/le-sanglier-et-le-papillon-la-mue/7438ac58-fb2b-4ddc-bbda-d2d3d61681c5"
+      ],
+      "terms": [
+        {
+          "id": "0.0.0.0.0",
+          "label": "Tentoonstelling",
+          "domain": "eventtype"
+        }
+      ],
+      "created": "2021-01-13T10:56:12+00:00",
+      "modified": "2021-01-13T11:07:19+00:00",
+      "creator": "618d65f9-641c-4697-8fd8-436dabaebd2e",
+      "workflowStatus": "READY_FOR_VALIDATION",
+      "audience": {
+        "audienceType": "everyone"
+      },
+      "languages": [
+        "fr",
+        "nl",
+        "en",
+        "de"
+      ],
+      "completedLanguages": [
+        "fr",
+        "nl"
+      ],
+      "production": null,
+      "typicalAgeRange": "18-95",
+      "description": {
+        "fr": "A travers la fabrication d’un atlas de terminologies installé dans la vitrine de Constant, Jen Debauche, accompagnée d’ Elsa Rossler, propose une ontologie personnelle de la folie, de la psychiatrie et des soins.\n\n« Je travaillais pour la Commission européenne, je pilotais un séminaire au Portugal, je dormais 3 heures par jour. Un matin, au lieu d’aller à mon bureau, j’ai acheté une hâche et l’ai apportée devant la directrice du département qui m’avait embauché... » Bruno raconte calmement cet épisode de sa vie, il en est sorti. Personne n’est à l’abri d’une traversée du miroir en territoire de folie. Les témoignages poignants et fascinants de cette création visuelle et sonore nous plongent dans une matière fictionnelle intense. La maladie n’est pas que souffrance, elle est aussi matière à réfléchir, à questionner, à inventer.\n\nVous êtes les bienvenu.e.s pour une séance d’écoute collective (Corona proof) des deux documentaires radio : Le sanglier et le papillon et La mue le 30 janvier 2021 de 19:00 à 21:30 au PIanofabriek, rue du Fort 35, 1060 Saint-Gilles.\n\nLe nombre de places disponible est limité. Réservez par e-mail en écrivant à : donatella@constantvzw.org",
+        "nl": "In de vitrine van Constant toont Jen Debauche, vergezeld door Elsa Rossler, een atlas van terminologieën die een persoonlijke ontologie voorstelt waanzin, zorg en psychiatrie.\n\n\"Ik werkte voor de Europese Commissie, ik leidde een seminar in Portugal, ik sliep 3 uur per dag. Op een ochtend, in plaats van naar mijn kantoor te gaan, kocht ik een bijl en bracht deze mee voor de directrice van de afdeling die me inhuurde...\" Bruno vertelt rustig over deze episode van zijn leven, hij kwam er uit. Niemand is veilig voor een stap door de spiegel naar het land van de gekte. De aangrijpende en fascinerende getuigenissen van deze klankcreatie dompelen ons onder in een intens fictief materiaal. Ziekte is niet alleen lijden, het is ook materie die leidt tot bevraging, uitvinden en reflectie.\n\nJe bent van harte welkom voor een (Corona-proof) collectieve luistersessie van de twee radiodocumentaires: Le sanglier et le papillon en La mue op 30 januari 2021 van 19u tot 21u30 in De PIanofabriek, Fortstraat 35, 1060 Sint-Gillis. Deze sessie is in het Frans.\n\nDe plaatsen zijn beperkt.  Reserveringen per email aan: donatella@constantvzw.org"
+      },
+      "mediaObject": [
+        {
+          "@id": "https://io.uitdatabank.be/images/e65ef366-65a0-4172-a0fe-6844655ad6b9",
+          "@type": "schema:ImageObject",
+          "contentUrl": "https://io.uitdatabank.be/images/e65ef366-65a0-4172-a0fe-6844655ad6b9.jpeg",
+          "thumbnailUrl": "https://io.uitdatabank.be/images/e65ef366-65a0-4172-a0fe-6844655ad6b9.jpeg",
+          "description": "Camouflage",
+          "copyrightHolder": "Lucile Desamory, 2010",
+          "inLanguage": "fr"
+        }
+      ],
+      "image": "https://io.uitdatabank.be/images/e65ef366-65a0-4172-a0fe-6844655ad6b9.jpeg",
+      "videos": [
+        {
+          "id": "6d787098-3082-4a0f-a510-1df4597ae02f",
+          "url": "https://www.youtube.com/watch?v=cEItmb_a20D",
+          "embedUrl": "https://www.youtube.com/embed/cEItmb_a20D",
+          "language": "nl",
+          "copyrightHolder": "Copyright afgehandeld door YouTube"
+        },
+        {
+          "id": "192a07d9-049b-4c2a-bc94-e46b7a557529",
+          "url": "https://www.youtube.com/watch?v=sXYtmb_q19C",
+          "embedUrl": "https://www.youtube.com/embed/sXYtmb_q19C",
+          "language": "fr",
+          "copyrightHolder": "publiq"
+        }
+      ],
+      "organizer": {
+        "@type": "Organizer",
+        "@id": "https://io.uitdatabank.be/organizers/50c2e3f1-1f40-47a0-a72f-265ede8048fb",
+        "@context": "/contexts/organizer",
+        "mainLanguage": "nl",
+        "url": "http://constantvzw.org",
+        "name": {
+          "nl": "Constant vzw"
+        },
+        "created": "2018-05-09T12:32:39+00:00",
+        "creator": "618d65f9-641c-4697-8fd8-436dabaebd2e",
+        "workflowStatus": "ACTIVE",
+        "languages": [
+          "nl"
+        ],
+        "completedLanguages": [
+          "nl"
+        ],
+        "modified": "2018-05-09T12:32:39+00:00",
+        "address": {
+          "nl": {
+            "addressCountry": "BE",
+            "addressLocality": "Sint-Gillis",
+            "postalCode": "1060",
+            "streetAddress": "Fortstraat 5"
+          },
+          "fr": {
+            "addressCountry": "BE",
+            "addressLocality": "Saint-Gilles",
+            "postalCode": "1060",
+            "streetAddress": "Rue du Fort 5"
+          }
+        },
+        "contactPoint": {
+          "phone": [],
+          "email": [
+            "info@constantvzw.org"
+          ],
+          "url": []
+        }
+      },
+      "priceInfo": [
+        {
+          "category": "base",
+          "name": {
+            "nl": "Basistarief",
+            "fr": "Tarif de base",
+            "en": "Base tariff",
+            "de": "Basisrate"
+          },
+          "price": 0,
+          "priceCurrency": "EUR"
+        }
+      ],
+      "contactPoint": {
+        "phone": [
+          "025392467"
+        ],
+        "email": [
+          "info@constantvzw.org"
+        ],
+        "url": [
+          "http://www.constantvzw.org"
+        ]
+      },
+      "availableFrom": "2021-01-13T12:00:38+01:00",
+      "metadata": {
+        "popularity": 0
+      },
+      "regions": [
+        "reg-brussel",
+        "nis-21013",
+        "nis-21013A",
+        "nis-01000"
+      ]
+    }
+  ],
+  "facet": {
+    "regions": {
+      "nis-01000": {
+        "name": {
+          "nl": "Brussels Hoofdstedelijk Gewest",
+          "fr": "Région de Bruxelles-Capitale",
+          "de": "Region Brüssel-Hauptstadt"
+        },
+        "count": 4
+      }
+    }
+  }
+}

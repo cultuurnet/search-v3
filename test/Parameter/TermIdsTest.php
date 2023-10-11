@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\TermIds;
+namespace CultuurNet\SearchV3\Parameter;
 
-class TermIdsTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class TermIdsTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $termId = new TermIds('JCjA0i5COUmdjMwcyjNAFA');
 
         $key = $termId->getKey();
         $value = $termId->getValue();
 
-        $this->assertEquals($key, 'termIds');
-        $this->assertEquals($value, 'JCjA0i5COUmdjMwcyjNAFA');
+        $this->assertEquals('termIds', $key);
+        $this->assertEquals('JCjA0i5COUmdjMwcyjNAFA', $value);
     }
 }

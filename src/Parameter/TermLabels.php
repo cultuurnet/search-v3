@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on term labels.
- */
-class TermLabels extends AbstractParameter
+final class TermLabels extends AbstractParameter
 {
-
-    /**
-     * TermLabels constructor.
-     * @param $termLabel string
-     */
-    public function __construct($termLabel)
+    public function __construct(string $termLabel)
     {
         $this->value = $termLabel;
         $this->key = 'termLabels';
+    }
+
+    public function allowsMultiple(): bool
+    {
+        return true;
     }
 }

@@ -1,19 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameters to search on addressCountry.
- */
-
-class AddressCountry extends AbstractParameter
+final class AddressCountry extends AbstractParameter
 {
-
-    /**
-     * AddressCountry constructor.
-     * @param $addressCountry
-     */
-    public function __construct($addressCountry)
+    public function __construct(string $addressCountry)
     {
         $this->value = $addressCountry;
         $this->key = 'addressCountry';

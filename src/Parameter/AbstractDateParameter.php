@@ -1,28 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
+
+use DateTimeInterface;
+use InvalidArgumentException;
 
 abstract class AbstractDateParameter extends AbstractParameter
 {
-    /**
-     * Formats the date.
-     * @param $date
-     * @return string
-     */
-    protected function formatDate($date)
+    final public function __construct(DateTimeInterface $dateTime)
     {
-        return $date->format(\DateTime::ATOM);
+        $this->value = $dateTime->format(DATE_ATOM);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValue()
+    public static function createFromAtomString(string $value): self
     {
-        if ($this->value instanceof \DateTime) {
-            return $this->formatDate($this->value);
-        } else {
-            return $this->value;
+        $dateTime = \DateTimeImmutable::createFromFormat(DATE_ATOM, $value);
+        if ($dateTime === false) {
+            throw new InvalidArgumentException('Could not parse ' . $value . ' as a date in the atom format');
         }
+        return new static($dateTime);
+    }
+
+    public static function wildcard(): self
+    {
+        $parameter = new static(new \DateTimeImmutable());
+        $parameter->value = '*';
+        return $parameter;
     }
 }

@@ -1,134 +1,84 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\DeserializationContext;
-use JMS\Serializer\JsonDeserializationVisitor;
-use JMS\Serializer\TypeParser;
-
-/**
- * Represents the facets on a search result.
- */
-class FacetResultItem
+final class FacetResultItem
 {
-
     /**
      * The value of the facet item.
      *
      * @var string
      */
-    protected $value;
+    private $value;
 
     /**
      * The name of this facet result.
      *
      * @var TranslatedString
      */
-    protected $name;
+    private $name;
 
     /**
      * Total results for this item.
      *
      * @var int
      */
-    protected $count;
+    private $count;
 
     /**
      * Child facet results
      *
      * @var array
      */
-    protected $children;
+    private $children;
 
-    /**
-     * @return string
-     */
-    public function getValue()
+    public function __construct(string $value, TranslatedString $name, int $count, array $children = [])
+    {
+        $this->value = $value;
+        $this->name = $name;
+        $this->count = $count;
+        $this->children = $children;
+    }
+
+    public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param string $value
-     * @return FacetResultItem
-     */
-    public function setValue($value)
+    public function setValue(string $value): void
     {
         $this->value = $value;
-
-        return $this;
     }
 
-    /**
-     * @return TranslatedString
-     */
-    public function getName()
+    public function getName(): TranslatedString
     {
         return $this->name;
     }
 
-    /**
-     * @param TranslatedString $names
-     * @return FacetResultItem
-     */
-    public function setName($name)
+    public function setName(TranslatedString $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->count;
     }
 
-    /**
-     * @param int $count
-     * @return FacetResultItem
-     */
-    public function setCount($count)
+    public function setCount(int $count): void
     {
         $this->count = $count;
-
-        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
 
-    /**
-     * @param array $children
-     * @return FacetResultItem
-     */
-    public function setChildren($children)
+    public function setChildren(array $children): void
     {
-        $this->children = $children;
-
-        return $this;
-    }
-
-    /**
-     * FacetResultItem constructor.
-     * @param $value
-     * @param TranslatedString $names
-     * @param $count
-     * @param $children
-     */
-    public function __construct($value, TranslatedString $name, $count, $children)
-    {
-        $this->value = $value;
-        $this->name = $name;
-        $this->count = $count;
         $this->children = $children;
     }
 }

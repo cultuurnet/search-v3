@@ -1,22 +1,24 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\GeoPoint;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class GeoPointTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class GeoPointTest extends TestCase
 {
     /**
      * @var GeoPoint
      */
     protected $geoPoint;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->geoPoint = new GeoPoint();
     }
 
-    public function testGetLatitudeMethod()
+    public function testGetLatitudeMethod(): void
     {
         $this->geoPoint->setLatitude('40.3445');
 
@@ -24,7 +26,7 @@ class GeoPointTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('40.3445', $result);
     }
 
-    public function testGetLongitudeMethod()
+    public function testGetLongitudeMethod(): void
     {
         $this->geoPoint->setLongitude('4.321');
 

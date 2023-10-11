@@ -1,89 +1,68 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3;
 
 use CultuurNet\SearchV3\Serializer\SerializerInterface;
+use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use GuzzleHttp\ClientInterface;
 
-/**
- * Default search client to perform searches on the search api.
- * @package CultuurNet\SearchV3
- */
-class SearchClient implements SearchClientInterface
+final class SearchClient implements SearchClientInterface
 {
-
     /**
      * @var ClientInterface
      */
-    protected $client;
+    private $client;
 
     /**
      * @var SerializerInterface
      */
-    protected $serializer;
+    private $serializer;
 
-    /**
-     * SearchClient constructor.
-     * @param ClientInterface $client
-     */
     public function __construct(ClientInterface $client, SerializerInterface $serializer)
     {
         $this->client = $client;
         $this->serializer = $serializer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setClient(ClientInterface $client)
+    public function setClient(ClientInterface $client): void
     {
         $this->client = $client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getClient()
+    public function getClient(): ClientInterface
     {
         return $this->client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function searchEvents(SearchQueryInterface $searchQuery)
+    public function searchEvents(SearchQueryInterface $searchQuery): PagedCollection
     {
         return $this->search($searchQuery, 'events');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function searchPlaces(SearchQueryInterface $searchQuery)
+    public function searchPlaces(SearchQueryInterface $searchQuery): PagedCollection
     {
         return $this->search($searchQuery, 'places');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function searchOffers(SearchQueryInterface $searchQuery)
+    public function searchOffers(SearchQueryInterface $searchQuery): PagedCollection
     {
         return $this->search($searchQuery, 'offers');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function search(SearchQueryInterface $searchQuery, $type)
+    public function searchOrganizers(SearchQueryInterface $searchQuery): PagedCollection
     {
+        return $this->search($searchQuery, 'organizers');
+    }
 
+    private function search(SearchQueryInterface $searchQuery, $type): PagedCollection
+    {
         $options = [
-          'query' => $searchQuery->toArray()
+          'query' => $searchQuery->toArray(),
         ];
 
         $result = $this->client->request('GET', $type, $options);
-
-        return $this->serializer->deserialize($result->getBody(true));
+        return $this->serializer->deserialize((string) $result->getBody());
     }
 }

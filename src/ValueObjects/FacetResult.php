@@ -1,68 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
-class FacetResult
+final class FacetResult
 {
-
     /**
      * Field where facets are based on.
      * @var string
      */
-    protected $field;
+    private $field;
 
     /**
-     * All results for this facet.
      * @var FacetResultItem[]
      */
-    protected $results;
+    private $results;
 
     /**
-     * @return string
+     * @param FacetResultItem[] $results
      */
-    public function getField()
+    public function __construct(string $field, array $results)
+    {
+        $this->field = $field;
+        $this->results = $results;
+    }
+
+    public function getField(): string
     {
         return $this->field;
     }
 
-    /**
-     * @param string $field
-     * @return FacetResult
-     */
-    public function setField($field)
+    public function setField(string $field): void
     {
         $this->field = $field;
-
-        return $this;
     }
 
-    /**
-     * @return FacetResultItem[]
-     */
-    public function getResults()
+    public function getResults(): array
     {
         return $this->results;
     }
 
     /**
      * @param FacetResultItem[] $results
-     * @return FacetResult
      */
-    public function setResults($results)
+    public function setResults(array $results): void
     {
-        $this->results = $results;
-
-        return $this;
-    }
-
-    /**
-     * FacetResult constructor.
-     * @param $field
-     * @param $results
-     */
-    public function __construct($field, $results)
-    {
-        $this->field = $field;
         $this->results = $results;
     }
 }

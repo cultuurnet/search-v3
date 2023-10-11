@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\OrganizerId;
+namespace CultuurNet\SearchV3\Parameter;
 
-class OrganizerIdTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class OrganizerIdTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $id = new OrganizerId('7d1f485d-dab5-4ad2-8894-322060a2bc52');
 
         $key = $id->getKey();
         $value = $id->getValue();
 
-        $this->assertEquals($key, 'organizerId');
-        $this->assertEquals($value, '7d1f485d-dab5-4ad2-8894-322060a2bc52');
+        $this->assertEquals('organizerId', $key);
+        $this->assertEquals('7d1f485d-dab5-4ad2-8894-322060a2bc52', $value);
     }
 }

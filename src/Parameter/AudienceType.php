@@ -1,22 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on audienceType.
- */
-class AudienceType extends AbstractParameter
+final class AudienceType extends AbstractParameter
 {
+    public const AUDIENCE_EVERYONE = 'everyone';
+    public const AUDIENCE_MEMBERS = 'members';
+    public const AUDIENCE_EDUCATION = 'education';
 
-    const AUDIENCE_EVERYONE = 'everyone';
-    const AUDIENCE_MEMBERS = 'members';
-    const AUDIENCE_EDUCATION = 'education';
-
-    /**
-     * AudienceType constructor.
-     * @param $audienceType
-     */
-    public function __construct($audienceType)
+    public function __construct(string $audienceType)
     {
         $this->value = $audienceType;
         $this->key = 'audienceType';

@@ -1,42 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\SerializedName;
 
-class Audience
+final class Audience
 {
-
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $audienceType;
+    private $audienceType;
 
     public function __construct(
-        $audienceType = null
+        ?string $audienceType = null
     ) {
         $this->audienceType = $audienceType;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getAudienceType()
+    public function getAudienceType(): ?string
     {
         return $this->audienceType;
     }
 
-    /**
-     * @param string $audienceType
-     * @return Audience
-     */
-    public function setAudienceType($audienceType)
+    public function setAudienceType(string $audienceType): void
     {
         $this->audienceType = $audienceType;
-
-        return $this;
     }
 }

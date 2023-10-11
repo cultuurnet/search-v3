@@ -1,20 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Parameter;
 
-/**
- * Provides a parameter to search on hasMediaObject.
- */
-class MediaObject extends AbstractParameter
+final class MediaObject extends AbstractParameter
 {
-
-    /**
-     * Id constructor.
-     * @param $hasMediaObject boolean
-     */
-    public function __construct(bool $hasMediaObject)
+    public function __construct(bool $hasMediaObjects)
     {
-        $this->value = $hasMediaObject;
-        $this->key = 'hasMediaObject';
+        $this->value = $hasMediaObjects;
+        $this->key = 'hasMediaObjects';
     }
 }

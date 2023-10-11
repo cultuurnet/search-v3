@@ -1,27 +1,41 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\DateFrom;
+namespace CultuurNet\SearchV3\Parameter;
 
-class DateFromTest extends \PHPUnit_Framework_TestCase
+use DateTime;
+use PHPUnit\Framework\TestCase;
+
+final class DateFromTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
-        $dateTime = new \DateTime('21-12-2017T10:00:00+01:00');
-        $id = new DateFrom($dateTime);
+        $dateTime = new DateTime('2017-12-21T10:00:00+01:00');
+        $dateFrom = new DateFrom($dateTime);
 
-        $key = $id->getKey();
-        $value = $id->getValue();
+        $key = $dateFrom->getKey();
+        $value = $dateFrom->getValue();
 
         $this->assertEquals('dateFrom', $key);
         $this->assertEquals('2017-12-21T10:00:00+01:00', $value);
     }
 
-    public function testConstructorWithWildcard()
+    public function testFactoryMethodWithAtomString(): void
     {
-        $wildCard = '*';
-        $id = new DateFrom($wildCard);
+        $dateTime = '2017-12-21T10:00:00+01:00';
+        $dateFrom = DateFrom::createFromAtomString($dateTime);
+
+        $key = $dateFrom->getKey();
+        $value = $dateFrom->getValue();
+
+        $this->assertEquals('dateFrom', $key);
+        $this->assertEquals('2017-12-21T10:00:00+01:00', $value);
+    }
+
+    public function testWithWildcard(): void
+    {
+        $id = DateFrom::wildcard();
 
         $key = $id->getKey();
         $value = $id->getValue();

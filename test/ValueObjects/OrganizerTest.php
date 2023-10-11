@@ -1,24 +1,24 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\ContactPoint;
-use CultuurNet\SearchV3\ValueObjects\Organizer;
-use CultuurNet\SearchV3\ValueObjects\TranslatedString;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class OrganizerTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class OrganizerTest extends TestCase
 {
     /**
      * @var Organizer
      */
     protected $organizer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->organizer = new Organizer();
     }
 
-    public function testGetIdMethod()
+    public function testGetIdMethod(): void
     {
         $this->organizer->setId('organizer id');
 
@@ -26,7 +26,7 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('organizer id', $result);
     }
 
-    public function testGetCdbidMethod()
+    public function testGetCdbidMethod(): void
     {
         $this->organizer->setId('this/is/an/organizer-id');
 
@@ -34,38 +34,38 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('organizer-id', $result);
     }
 
-    public function testGetAndSetNameMethods()
+    public function testGetAndSetNameMethods(): void
     {
         $name = new TranslatedString(['nl' => 'organizer name']);
         $this->organizer->setName($name);
         $this->assertEquals($name, $this->organizer->getName());
     }
 
-    public function testGetEmailMethod()
+    public function testGetEmailMethod(): void
     {
-        $this->organizer->setEmail(array('test@organizer.com'));
+        $this->organizer->setEmail(['test@organizer.com']);
 
         $result = $this->organizer->getEmail();
-        $this->assertEquals(array('test@organizer.com'), $result);
+        $this->assertEquals(['test@organizer.com'], $result);
     }
 
-    public function testGetContactPointMehtod()
+    public function testGetContactPointMehtod(): void
     {
         $contactPoint = new ContactPoint();
-        $contactPoint->setEmails(array('info@publiq.be'));
-        $contactPoint->setUrls(array('google.be'));
-        $contactPoint->setPhoneNumbers(array('1234567890'));
+        $contactPoint->setEmails(['info@publiq.be']);
+        $contactPoint->setUrls(['google.be']);
+        $contactPoint->setPhoneNumbers(['1234567890']);
         $this->organizer->setContactPoint($contactPoint);
 
         $result = $this->organizer->getContactPoint();
         $this->assertEquals($contactPoint, $result);
     }
 
-    public function testGetHiddenLabelsMethod()
+    public function testGetHiddenLabelsMethod(): void
     {
-        $this->organizer->setHiddenLabels(array('hidden1', 'hidden2'));
+        $this->organizer->setHiddenLabels(['hidden1', 'hidden2']);
 
         $result = $this->organizer->getHiddenLabels();
-        $this->assertEquals(array('hidden1', 'hidden2'), $result);
+        $this->assertEquals(['hidden1', 'hidden2'], $result);
     }
 }

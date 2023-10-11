@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\CalendarType;
+namespace CultuurNet\SearchV3\Parameter;
 
-class CalendarTypeTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class CalendarTypeTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $calendarType = new CalendarType('single');
 
         $key = $calendarType->getKey();
         $value = $calendarType->getValue();
 
-        $this->assertEquals($key, 'calendarType');
-        $this->assertEquals($value, 'single');
+        $this->assertEquals('calendarType', $key);
+        $this->assertEquals('single', $value);
     }
 }

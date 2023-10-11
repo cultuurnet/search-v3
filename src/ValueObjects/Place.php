@@ -1,57 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
 
-class Place extends Offer
+final class Place extends Offer
 {
-
     /**
-     * @var Address
+     * @var TranslatedAddress|null
      * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedAddress")
      */
-    protected $address;
+    private $address;
 
     /**
+     * @var GeoPoint
      * @Type("CultuurNet\SearchV3\ValueObjects\GeoPoint")
      */
-    protected $geo;
+    private $geo;
 
-    /**
-     * @return Address
-     */
-    public function getAddress()
+    public function getAddress(): ?TranslatedAddress
     {
         return $this->address;
     }
 
-    /**
-     * @param Address $address
-     * @return Place
-     */
-    public function setAddress($address)
+    public function setAddress(TranslatedAddress $address): void
     {
         $this->address = $address;
-
-        return $this;
     }
 
-    /**
-     * @return GeoPoint
-     */
-    public function getGeo()
+    public function getGeo(): ?GeoPoint
     {
         return $this->geo;
     }
 
-    /**
-     * @param mixed $geo
-     * @return Place
-     */
-    public function setGeo($geo)
+    public function setGeo(GeoPoint $geo): void
     {
         $this->geo = $geo;
-        return $this;
     }
 }

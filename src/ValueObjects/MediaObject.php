@@ -1,134 +1,132 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 
-class MediaObject
+final class MediaObject
 {
+    /**
+     * @var string|null
+     * @Type("string")
+     * @SerializedName("@id")
+     */
+    private $id;
 
     /**
-     * @var string
+     * @var string|null
+     * @Type("string")
+     * @SerializedName("id")
+     */
+    private $uuid;
+
+    /**
+     * @var string|null
      * @Type("string")
      */
-    protected $id;
+    private $contentUrl;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $contentUrl;
+    private $thumbnailUrl;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $thumbnailUrl;
+    private $description;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $description;
+    private $copyrightHolder;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $copyrightHolder;
+    private $inLanguage;
 
     /**
-     * @return string
+     * @var string|null
+     * @Type("string")
      */
-    public function getId()
+    private $language;
+
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     * @return MediaObject
-     */
-    public function setId($id)
+    public function setId(string $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getContentUrl()
+    public function getUuid(): ?string
+    {
+      return $this->uuid;
+    }
+
+    public function setUuid(?string $uuid): void
+    {
+      $this->uuid = $uuid;
+    }
+
+    public function getContentUrl(): ?string
     {
         return $this->contentUrl;
     }
 
-    /**
-     * @param string $contentUrl
-     * @return MediaObject
-     */
-    public function setContentUrl($contentUrl)
+    public function setContentUrl(string $contentUrl): void
     {
         $this->contentUrl = $contentUrl;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getThumbnailUrl()
+    public function getThumbnailUrl(): string
     {
         return $this->thumbnailUrl;
     }
 
-    /**
-     * @param string $thumbnailUrl
-     * @return MediaObject
-     */
-    public function setThumbnailUrl($thumbnailUrl)
+    public function setThumbnailUrl(string $thumbnailUrl): void
     {
         $this->thumbnailUrl = $thumbnailUrl;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return MediaObject
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCopyrightHolder()
+    public function getCopyrightHolder(): string
     {
         return $this->copyrightHolder;
     }
 
-    /**
-     * @param string $copyrightHolder
-     * @return MediaObject
-     */
-    public function setCopyrightHolder($copyrightHolder)
+    public function setCopyrightHolder(string $copyrightHolder): void
     {
         $this->copyrightHolder = $copyrightHolder;
+    }
 
-        return $this;
+    public function setLanguage(string $language): void
+    {
+      $this->language = $language;
+      $this->inLanguage = $language;
+    }
+
+    public function getLanguage(): ?string
+    {
+      return $this->language ?? $this->inLanguage;
     }
 }

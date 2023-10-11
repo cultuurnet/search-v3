@@ -1,13 +1,18 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test;
+declare(strict_types=1);
 
+namespace CultuurNet\SearchV3;
+
+use CultuurNet\SearchV3\Parameter\CalendarSummary;
 use CultuurNet\SearchV3\Parameter\Facet;
 use CultuurNet\SearchV3\Parameter\Id;
 use CultuurNet\SearchV3\Parameter\Label;
-use CultuurNet\SearchV3\SearchQuery;
+use CultuurNet\SearchV3\Parameter\Query;
+use CultuurNet\SearchV3\ValueObjects\CalendarSummaryFormat;
+use PHPUnit\Framework\TestCase;
 
-class SearchQueryTest extends \PHPUnit_Framework_TestCase
+final class SearchQueryTest extends TestCase
 {
     /**
      * @var SearchQuery
@@ -34,17 +39,20 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
      */
     protected $sorting;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->searchQuery = new SearchQuery();
 
         $this->label = new Label('test-label');
         $this->facet = new Facet('regions');
 
-        $this->sorting = array('title', 'asc');
+        $this->sorting = ['title', 'asc'];
 
         $this->searchQuery->addParameter($this->label);
         $this->searchQuery->addParameter($this->facet);
+
+        $this->searchQuery->addParameter(new CalendarSummary(new CalendarSummaryFormat('html', 'md')));
+        $this->searchQuery->addParameter(new CalendarSummary(new CalendarSummaryFormat('text', 'lg')));
 
         $this->searchQuery->addSort($this->sorting[0], $this->sorting[1]);
         $this->searchQuery->setEmbed(true);
@@ -52,12 +60,12 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->searchQuery->setLimit(50);
     }
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $this->assertInstanceOf(SearchQuery::class, $this->searchQuery);
     }
 
-    public function testAddParameterMethod()
+    public function testAddParameterMethod(): void
     {
         $idParameter = new Id('this-is-a-fake-id');
 
@@ -69,7 +77,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedParameters, $this->searchQuery->getParameters());
     }
 
-    public function testRemoveParametersMethod()
+    public function testRemoveParametersMethod(): void
     {
         $expectedParameters = $this->searchQuery->getParameters();
         unset($expectedParameters[1]);
@@ -79,13 +87,13 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedParameters, $this->searchQuery->getParameters());
     }
 
-    public function testGetParametersMethod()
+    public function testGetParametersMethod(): void
     {
         $expectedParameters = $this->searchQuery->getParameters();
         $this->assertEquals($expectedParameters, $this->searchQuery->getParameters());
     }
 
-    public function testAddSortMethod()
+    public function testAddSortMethod(): void
     {
         $expectedSortings = $this->searchQuery->getSort();
         $expectedSortings['availableTo'] = 'desc';
@@ -95,7 +103,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedSortings, $this->searchQuery->getSort());
     }
 
-    public function testRemoveSortMethod()
+    public function testRemoveSortMethod(): void
     {
         $expectedSortings = [];
         $this->searchQuery->removeSort('title');
@@ -103,79 +111,142 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedSortings, $this->searchQuery->getSort());
     }
 
-    public function testGetSortMethod()
+    public function testGetSortMethod(): void
     {
         $expectedSortings = $this->searchQuery->getSort();
         $this->assertEquals($expectedSortings, $this->searchQuery->getSort());
     }
 
-    public function testToArrayMethod()
+    public function testToArrayMethod(): void
     {
-        $expectedQuery = array(
-            'sort' => array(
-                'title' => 'asc'
-            ),
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
             'embed' => true,
             'start' => 10,
             'limit' => 50,
             'labels' => 'test-label',
-            'facets' => 'regions'
-        );
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+        ];
 
         $result = $this->searchQuery->toArray();
 
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public function testToArrayMethodWithDuplicateParameterKeys()
+    public function testToArrayMethodWithDuplicateParameterKeys(): void
     {
         $this->searchQuery->addParameter(new Label('test-label2'));
 
-        $expectedQuery = array(
-            'sort' => array(
-                'title' => 'asc'
-            ),
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
             'embed' => true,
             'start' => 10,
             'limit' => 50,
-            'labels' => array(
+            'labels' => [
               'test-label',
               'test-label2',
-            ),
-            'facets' => 'regions'
-        );
+            ],
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+        ];
 
         $result = $this->searchQuery->toArray();
 
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public function testToArrayMethodWithDuplicateFacetKeys()
+    public function testToArrayMethodWithDuplicateFacetKeys(): void
     {
         $this->searchQuery->addParameter(new Facet('types'));
 
-        $expectedQuery = array(
-            'sort' => array(
-                'title' => 'asc'
-            ),
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
             'embed' => true,
             'start' => 10,
             'limit' => 50,
             'labels' => 'test-label',
-            'facets' => array(
+            'facets' => [
                 'regions',
-                'types'
-            )
-        );
+                'types',
+            ],
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+        ];
 
         $result = $this->searchQuery->toArray();
 
         $this->assertEquals($expectedQuery, $result);
     }
 
-    public function testToStringMethod()
+    public function testToArrayMethodWithOneAdvancedQuery(): void
     {
-        $expectedQueryString = 'labels=test-label&facets=regions&sort[title]=asc&embed=1&start=10&limit=50';
+        $this->searchQuery->addParameter(new Query('foo:bar'));
+
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
+            'embed' => true,
+            'start' => 10,
+            'limit' => 50,
+            'labels' => 'test-label',
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+            'q' => 'foo:bar',
+        ];
+
+        $result = $this->searchQuery->toArray();
+
+        $this->assertEquals($expectedQuery, $result);
+    }
+
+    public function testToArrayMethodWithMultipleAdvancedQueries(): void
+    {
+        $this->searchQuery->addParameter(new Query('foo:bar'));
+        $this->searchQuery->addParameter(new Query('het depot'));
+
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
+            'embed' => true,
+            'start' => 10,
+            'limit' => 50,
+            'labels' => 'test-label',
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+            'q' => '(foo:bar) AND (het depot)',
+        ];
+
+        $result = $this->searchQuery->toArray();
+
+        $this->assertEquals($expectedQuery, $result);
+    }
+
+    public function testToStringMethod(): void
+    {
+        $expectedQueryString = 'labels=test-label&facets=regions&embedCalendarSummaries[0]=md-html&embedCalendarSummaries[1]=lg-text&sort[title]=asc&embed=1&start=10&limit=50';
         $result = $this->searchQuery->__toString();
 
         $this->assertEquals($result, $expectedQueryString);

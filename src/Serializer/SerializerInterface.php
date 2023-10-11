@@ -1,19 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Serializer;
 
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
+use JMS\Serializer\SerializerInterface as JMSSerializerInterface;
 
-/**
- * Provides an interface for search serializer.
- */
 interface SerializerInterface
 {
-
     /**
      * Set the JMS serializer.
      */
-    public function setSerializer(\JMS\Serializer\SerializerInterface $serializer);
+    public function setSerializer(JMSSerializerInterface $serializer);
 
     /**
      * Serialize the object to jsonld.
@@ -24,8 +23,8 @@ interface SerializerInterface
      * Deserialize the jsonld.
      * @param string $jsonString
      *   The json formatted string of the object.
-     * @param $class
+     * @param class-string $class
      *   Type to decode to.
      */
-    public function deserialize(string $jsonString, $class = PagedCollection::class);
+    public function deserialize(string $jsonString, string $class = PagedCollection::class);
 }

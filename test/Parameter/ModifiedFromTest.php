@@ -1,27 +1,41 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\ModifiedFrom;
+namespace CultuurNet\SearchV3\Parameter;
 
-class ModifiedFromTest extends \PHPUnit_Framework_TestCase
+use DateTime;
+use PHPUnit\Framework\TestCase;
+
+final class ModifiedFromTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
-        $dateTime = new \DateTime('21-12-2017T10:00:00+01:00');
-        $id = new ModifiedFrom($dateTime);
+        $dateTime = new DateTime('2017-12-21T10:00:00+01:00');
+        $modifiedFrom = new ModifiedFrom($dateTime);
 
-        $key = $id->getKey();
-        $value = $id->getValue();
+        $key = $modifiedFrom->getKey();
+        $value = $modifiedFrom->getValue();
 
         $this->assertEquals('modifiedFrom', $key);
         $this->assertEquals('2017-12-21T10:00:00+01:00', $value);
     }
 
-    public function testConstructorWithWildcard()
+    public function testFactoryMethodWithAtomString(): void
     {
-        $wildCard = '*';
-        $id = new ModifiedFrom($wildCard);
+        $dateTime = '2017-12-21T10:00:00+01:00';
+        $modifiedFrom = ModifiedFrom::createFromAtomString($dateTime);
+
+        $key = $modifiedFrom->getKey();
+        $value = $modifiedFrom->getValue();
+
+        $this->assertEquals('modifiedFrom', $key);
+        $this->assertEquals('2017-12-21T10:00:00+01:00', $value);
+    }
+
+    public function testWithWildcard(): void
+    {
+        $id = ModifiedFrom::wildcard();
 
         $key = $id->getKey();
         $value = $id->getValue();

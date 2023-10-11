@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\TermLabels;
+namespace CultuurNet\SearchV3\Parameter;
 
-class TermLabelsTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class TermLabelsTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $termLabel = new TermLabels('Jeugdhuis of jeugdcentrum');
 
         $key = $termLabel->getKey();
         $value = $termLabel->getValue();
 
-        $this->assertEquals($key, 'termLabels');
-        $this->assertEquals($value, 'Jeugdhuis of jeugdcentrum');
+        $this->assertEquals('termLabels', $key);
+        $this->assertEquals('Jeugdhuis of jeugdcentrum', $value);
     }
 }

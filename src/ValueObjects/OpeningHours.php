@@ -1,77 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
 
-/**
- * OpeningHours class.
- */
-class OpeningHours
+final class OpeningHours
 {
-
     /**
-     * @var array
+     * @var string[]
      * @Type("array<string>")
      */
-    protected $dayOfWeek = [];
+    private $dayOfWeek = [];
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $opens;
+    private $opens;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $closes;
+    private $closes;
 
     /**
-     * @return mixed
+     * @return string[]
      */
-    public function getDaysOfWeek()
+    public function getDaysOfWeek(): array
     {
         return $this->dayOfWeek;
     }
 
     /**
-     * @param mixed $dayOfWeek
+     * @param string[] $dayOfWeek
      */
-    public function setDaysOfWeek($dayOfWeek)
+    public function setDaysOfWeek(array $dayOfWeek): void
     {
         $this->dayOfWeek = $dayOfWeek;
     }
 
-    /**
-     * @return string
-     */
-    public function getOpens()
+    public function getOpens(): ?string
     {
         return $this->opens;
     }
 
-    /**
-     * @param string $opens
-     */
-    public function setOpens($opens)
+    public function setOpens(string $opens): void
     {
         $this->opens = $opens;
     }
 
-    /**
-     * @return string
-     */
-    public function getCloses()
+    public function getCloses(): ?string
     {
         return $this->closes;
     }
 
-    /**
-     * @param string $closes
-     */
-    public function setCloses($closes)
+    public function setCloses(string $closes): void
     {
         $this->closes = $closes;
     }

@@ -1,67 +1,48 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\SerializedName;
 
-class Performer
+final class Performer
 {
-
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $name;
+    private $name;
 
     /**
-     * @var string
+     * @var string|null
      * @Type("string")
      */
-    protected $role;
+    private $role;
 
     public function __construct(
-        $name = null
+        ?string $name = null
     ) {
         $this->name = $name;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return string
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     * @return string
-     */
-    public function setRole($role)
+    public function setRole(string $role): void
     {
         $this->role = $role;
-
-        return $this;
     }
 }

@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\Uitpas;
+namespace CultuurNet\SearchV3\Parameter;
 
-class UitpasTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class UitpasTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $uitpas = new Uitpas(true);
 
         $key = $uitpas->getKey();
         $value = $uitpas->getValue();
 
-        $this->assertEquals($key, 'uitpas');
-        $this->assertEquals($value, true);
+        $this->assertEquals('uitpas', $key);
+        $this->assertEquals(true, $value);
     }
 }

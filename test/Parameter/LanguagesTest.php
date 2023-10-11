@@ -1,20 +1,22 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\Languages;
+namespace CultuurNet\SearchV3\Parameter;
 
-class LanguagesTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class LanguagesTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $language = new Languages(Languages::LANG_NL);
 
         $key = $language->getKey();
         $value = $language->getValue();
 
-        $this->assertEquals($key, 'languages');
-        $this->assertEquals($value, 'nl');
+        $this->assertEquals('languages', $key);
+        $this->assertEquals('nl', $value);
     }
 
     public function testConstructorWithWrongLanguage()

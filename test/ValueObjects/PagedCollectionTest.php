@@ -1,24 +1,24 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\PagedCollection;
-use CultuurNet\SearchV3\ValueObjects\Collection;
-use CultuurNet\SearchV3\ValueObjects\FacetResults;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class PagedCollectionTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class PagedCollectionTest extends TestCase
 {
     /**
      * @var PagedCollection
      */
     protected $pagedCollection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->pagedCollection = new PagedCollection();
     }
 
-    public function testGetItemsPerPageMethod()
+    public function testGetItemsPerPageMethod(): void
     {
         $this->pagedCollection->setItemsPerPage(10);
 
@@ -26,7 +26,7 @@ class PagedCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $result);
     }
 
-    public function testGetTotalItems()
+    public function testGetTotalItems(): void
     {
         $this->pagedCollection->setTotalItems(120);
 
@@ -34,7 +34,7 @@ class PagedCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(120, $result);
     }
 
-    public function testGetMemberMethod()
+    public function testGetMemberMethod(): void
     {
         $mockCollection = new Collection();
         $this->pagedCollection->setMember($mockCollection);
@@ -43,7 +43,7 @@ class PagedCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testGetFacets()
+    public function testGetFacets(): void
     {
         $mockFacetResults = new FacetResults();
         $this->pagedCollection->setFacets($mockFacetResults);

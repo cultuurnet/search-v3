@@ -1,19 +1,21 @@
 <?php
 
-namespace CultuurNet\SearchV3\Parameter\Test;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\Parameter\PostalCode;
+namespace CultuurNet\SearchV3\Parameter;
 
-class PostalCodeTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class PostalCodeTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $query = new PostalCode('3000');
 
         $key = $query->getKey();
         $value = $query->getValue();
 
-        $this->assertEquals($key, 'postalCode');
-        $this->assertEquals($value, '3000');
+        $this->assertEquals('postalCode', $key);
+        $this->assertEquals('3000', $value);
     }
 }

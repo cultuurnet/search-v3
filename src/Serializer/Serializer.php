@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CultuurNet\SearchV3\Serializer;
 
+use CultuurNet\SearchV3\Serializer\Handler\CalendarSummaryHandler;
 use CultuurNet\SearchV3\Serializer\Handler\DateTimeHandler;
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -12,47 +15,34 @@ use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface as JMSSerializerInterface;
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 
-/**
- * Provides a serializer for the serializing / deserializing of search results.
- */
-class Serializer implements SerializerInterface
+final class Serializer implements SerializerInterface
 {
-
     /**
-     * @var SerializerInterface
+     * @var JMSSerializerInterface
      */
     private $serializer;
 
-    /**
-     * Serializer constructor.
-     */
     public function __construct()
     {
-
         $this->serializer = SerializerBuilder::create()
             ->addMetadataDir(SerializerMetadata::directory(), SerializerMetadata::namespacePrefix())
             ->setAnnotationReader(new AnnotationReader())
             ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
             ->configureHandlers(function (HandlerRegistry $registry) {
                 $registry->registerSubscribingHandler(new DateTimeHandler());
+                $registry->registerSubscribingHandler(new CalendarSummaryHandler());
             })
             ->build();
-
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setSerializer(\JMS\Serializer\SerializerInterface $serializer)
+    public function setSerializer(JMSSerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize($object)
     {
         $serializationContext = SerializationContext::create()
@@ -64,10 +54,7 @@ class Serializer implements SerializerInterface
         return $this->serializer->serialize($object, 'json', $serializationContext);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function deserialize(string $jsonString, $class = PagedCollection::class)
+    public function deserialize(string $jsonString, string $class = PagedCollection::class)
     {
         $deserializationContext = DeserializationContext::create()
             ->setSerializeNull(true);

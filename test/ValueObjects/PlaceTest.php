@@ -1,40 +1,33 @@
 <?php
 
-namespace CultuurNet\SearchV3\Test\ValueObjects;
+declare(strict_types=1);
 
-use CultuurNet\SearchV3\ValueObjects\Address;
-use CultuurNet\SearchV3\ValueObjects\ContactPoint;
-use CultuurNet\SearchV3\ValueObjects\GeoPoint;
-use CultuurNet\SearchV3\ValueObjects\MediaObject;
-use CultuurNet\SearchV3\ValueObjects\OpeningHours;
-use CultuurNet\SearchV3\ValueObjects\Organizer;
-use CultuurNet\SearchV3\ValueObjects\Performer;
-use CultuurNet\SearchV3\ValueObjects\Place;
-use CultuurNet\SearchV3\ValueObjects\Term;
-use CultuurNet\SearchV3\ValueObjects\TranslatedString;
+namespace CultuurNet\SearchV3\ValueObjects;
 
-class PlaceTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+final class PlaceTest extends TestCase
 {
     /**
      * @var Place
      */
     protected $place;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->place = new Place();
     }
 
-    public function testGetAddressMethod()
+    public function testGetAddressMethod(): void
     {
-        $mockAddress = new Address();
+        $mockAddress = new TranslatedAddress();
         $this->place->setAddress($mockAddress);
 
         $result = $this->place->getAddress();
-        $this->assertInstanceOf(Address::class, $result);
+        $this->assertInstanceOf(TranslatedAddress::class, $result);
     }
 
-    public function testGetGeoMethod()
+    public function testGetGeoMethod(): void
     {
         $mockGeo = new GeoPoint();
         $this->place->setGeo($mockGeo);
@@ -47,7 +40,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
      * Test the abstract class methods
      */
 
-    public function testGetIdMethod()
+    public function testGetIdMethod(): void
     {
         $this->place->setId('place-id');
 
@@ -55,7 +48,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('place-id', $result);
     }
 
-    public function testGetCdbidMethod()
+    public function testGetCdbidMethod(): void
     {
         $this->place->setId('this/is/a/cdbid');
 
@@ -63,7 +56,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('cdbid', $result);
     }
 
-    public function testGetMainLanguageMethod()
+    public function testGetMainLanguageMethod(): void
     {
         $this->place->setMainLanguage('nl');
 
@@ -71,15 +64,14 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('nl', $result);
     }
 
-    public function testGetNameMethod()
+    public function testGetNameMethod(): void
     {
-
         $name = new TranslatedString(['nl' => 'name']);
         $this->place->setName($name);
         $this->assertEquals($name, $this->place->getName());
     }
 
-    public function testGetDescriptionMethod()
+    public function testGetDescriptionMethod(): void
     {
         $description = new TranslatedString(['nl' => 'description']);
 
@@ -87,7 +79,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($description, $this->place->getDescription());
     }
 
-    public function testGetCalendarTypeMethod()
+    public function testGetCalendarTypeMethod(): void
     {
         $this->place->setCalendarType('multiple');
 
@@ -95,15 +87,15 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('multiple', $result);
     }
 
-    public function testGetCalendarSummaryMethod()
+    public function testGetCalendarSummaryMethod(): void
     {
-        $this->place->setCalendarSummary('cal sum');
+        $this->place->setCalendarSummary(new CalendarSummary([]));
 
         $result = $this->place->getCalendarSummary();
-        $this->assertEquals('cal sum', $result);
+        $this->assertEquals(new CalendarSummary([]), $result);
     }
 
-    public function testGetCreatorMethod()
+    public function testGetCreatorMethod(): void
     {
         $this->place->setCreator('that\'s me!');
 
@@ -111,7 +103,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('that\'s me!', $result);
     }
 
-    public function testGetCreatedMethod()
+    public function testGetCreatedMethod(): void
     {
         $this->place->setCreated(new \DateTime('21-11-2017'));
 
@@ -119,7 +111,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new \DateTime('21-11-2017'), $result);
     }
 
-    public function testGetModifiedMethod()
+    public function testGetModifiedMethod(): void
     {
         $this->place->setModified(new \DateTime('25-11-2017'));
 
@@ -127,7 +119,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new \DateTime('25-11-2017'), $result);
     }
 
-    public function testGetPublisherMethod()
+    public function testGetPublisherMethod(): void
     {
         $this->place->setPublisher('publisher name');
 
@@ -135,7 +127,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('publisher name', $result);
     }
 
-    public function testGetTypicalAgeRangeMethod()
+    public function testGetTypicalAgeRangeMethod(): void
     {
         $this->place->setTypicalAgeRange('9 - 11 jaar');
 
@@ -143,15 +135,15 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('9 - 11 jaar', $result);
     }
 
-    public function testGetPerformersMethod()
+    public function testGetPerformersMethod(): void
     {
-        $this->place->setPerformers(array(new Performer('performer name')));
+        $this->place->setPerformers([new Performer('performer name')]);
 
         $result = $this->place->getPerformers();
-        $this->assertEquals(array(new Performer('performer name')), $result);
+        $this->assertEquals([new Performer('performer name')], $result);
     }
 
-    public function testGetImageMethod()
+    public function testGetImageMethod(): void
     {
         $this->place->setImage('http://path-to-image.com');
 
@@ -159,28 +151,28 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://path-to-image.com', $result);
     }
 
-    public function testGetMediaObjectsMethod()
+    public function testGetMediaObjectsMethod(): void
     {
         $mockMediaObject = new MediaObject();
-        $this->place->setMediaObjects(array($mockMediaObject));
+        $this->place->setMediaObjects([$mockMediaObject]);
 
         $result = $this->place->getMediaObjects();
-        $this->assertEquals(array($mockMediaObject), $result);
+        $this->assertEquals([$mockMediaObject], $result);
     }
 
-    public function testGetMainMediaObjectMethod()
+    public function testGetMainMediaObjectMethod(): void
     {
         $this->place->setImage('http://path-to-image.com');
 
         $mockMediaObject = new MediaObject();
         $mockMediaObject->setContentUrl('http://path-to-image.com');
-        $this->place->setMediaObjects(array($mockMediaObject));
+        $this->place->setMediaObjects([$mockMediaObject]);
 
         $result = $this->place->getMainMediaObject();
         $this->assertEquals($mockMediaObject, $result);
     }
 
-    public function testGetOrganizerMethod()
+    public function testGetOrganizerMethod(): void
     {
         $mockOrganizer = new Organizer();
         $this->place->setOrganizer($mockOrganizer);
@@ -189,23 +181,23 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mockOrganizer, $result);
     }
 
-    public function testGetLabelsMethod()
+    public function testGetLabelsMethod(): void
     {
-        $this->place->setLabels(array('label1', 'label2'));
+        $this->place->setLabels(['label1', 'label2']);
 
         $result = $this->place->getLabels();
-        $this->assertEquals(array('label1', 'label2'), $result);
+        $this->assertEquals(['label1', 'label2'], $result);
     }
 
-    public function testGetHiddenLabelsMethod()
+    public function testGetHiddenLabelsMethod(): void
     {
-        $this->place->setHiddenLabels(array('hidden1', 'hidden2'));
+        $this->place->setHiddenLabels(['hidden1', 'hidden2']);
 
         $result = $this->place->getHiddenLabels();
-        $this->assertEquals(array('hidden1', 'hidden2'), $result);
+        $this->assertEquals(['hidden1', 'hidden2'], $result);
     }
 
-    public function testGetStartDateMethod()
+    public function testGetStartDateMethod(): void
     {
         $this->place->setStartDate(new \DateTime('01-01-2017'));
 
@@ -213,7 +205,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new \DateTime('01-01-2017'), $result);
     }
 
-    public function testGetEndDateMethod()
+    public function testGetEndDateMethod(): void
     {
         $this->place->setEndDate(new \DateTime('31-12-2017'));
 
@@ -221,7 +213,7 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(new \DateTime('31-12-2017'), $result);
     }
 
-    public function testGetTermsMethod()
+    public function testGetTermsMethod(): void
     {
         $mockTerm1 = new Term();
         $mockTerm1->setId('1');
@@ -233,13 +225,13 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $mockTerm2->setLabel('term-label');
         $mockTerm2->setDomain('testOtherDomain');
 
-        $this->place->setTerms(array($mockTerm1, $mockTerm2));
+        $this->place->setTerms([$mockTerm1, $mockTerm2]);
 
         $result = $this->place->getTerms();
-        $this->assertEquals(array($mockTerm1, $mockTerm2), $result);
+        $this->assertEquals([$mockTerm1, $mockTerm2], $result);
     }
 
-    public function testGetTermsByDomainMethod()
+    public function testGetTermsByDomainMethod(): void
     {
         $mockTerm1 = new Term();
         $mockTerm1->setId('1');
@@ -251,13 +243,13 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $mockTerm2->setLabel('term-label');
         $mockTerm2->setDomain('testOtherDomain');
 
-        $this->place->setTerms(array($mockTerm1, $mockTerm2));
+        $this->place->setTerms([$mockTerm1, $mockTerm2]);
 
         $result = $this->place->getTermsByDomain('testDomain');
-        $this->assertEquals(array($mockTerm1), $result);
+        $this->assertEquals([$mockTerm1], $result);
     }
 
-    public function testGetContactPointMethod()
+    public function testGetContactPointMethod(): void
     {
         $mockContactPoint = new ContactPoint();
         $this->place->setContactPoint($mockContactPoint);
@@ -266,12 +258,12 @@ class PlaceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mockContactPoint, $result);
     }
 
-    public function testGetOpeningHoursMethod()
+    public function testGetOpeningHoursMethod(): void
     {
         $mockOpeningHour = new OpeningHours();
-        $this->place->setOpeningHours($mockOpeningHour);
+        $this->place->setOpeningHours([$mockOpeningHour]);
 
         $result = $this->place->getOpeningHours();
-        $this->assertEquals($mockOpeningHour, $result);
+        $this->assertEquals([$mockOpeningHour], $result);
     }
 }
