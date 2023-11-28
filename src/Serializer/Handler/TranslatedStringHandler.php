@@ -16,18 +16,18 @@ final class TranslatedStringHandler implements SubscribingHandlerInterface
     public static function getSubscribingMethods(): array
     {
         return [
-          [
-            'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
-            'format' => 'json',
-            'type' => TranslatedString::class,
-            'method' => 'deserializeStringFromJson',
-          ],
-          [
-            'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-            'format' => 'json',
-            'type' => TranslatedString::class,
-            'method' => 'serializeFromObject',
-          ],
+            [
+                'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
+                'format' => 'json',
+                'type' => TranslatedString::class,
+                'method' => 'deserializeStringFromJson',
+            ],
+            [
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'format' => 'json',
+                'type' => TranslatedString::class,
+                'method' => 'serializeFromObject',
+            ],
         ];
     }
 

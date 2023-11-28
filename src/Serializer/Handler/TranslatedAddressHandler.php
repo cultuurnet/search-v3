@@ -23,12 +23,12 @@ final class TranslatedAddressHandler implements SubscribingHandlerInterface
                 'type' => TranslatedAddress::class,
                 'method' => 'deserializeStringFromJson',
             ],
-          [
-            'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-            'format' => 'json',
-            'type' => TranslatedAddress::class,
-            'method' => 'serializeFromObject',
-          ],
+            [
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'format' => 'json',
+                'type' => TranslatedAddress::class,
+                'method' => 'serializeFromObject',
+            ],
         ];
     }
 
