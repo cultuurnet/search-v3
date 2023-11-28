@@ -200,7 +200,7 @@ final class Organizer
         return $this->address;
     }
 
-    public function setAddress(TranslatedAddress $address): void
+    public function setAddress(?TranslatedAddress $address): void
     {
         $this->address = $address;
     }

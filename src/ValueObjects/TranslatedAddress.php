@@ -29,9 +29,7 @@ final class TranslatedAddress
 
     public function addAddress(string $key, Address $address): void
     {
-        if (!isset($this->addresses[$key])) {
-            $this->addresses[$key] = $address;
-        }
+        $this->addresses[$key] = $address;
     }
 
     public function getAddressForLanguage(string $langcode): ?Address
