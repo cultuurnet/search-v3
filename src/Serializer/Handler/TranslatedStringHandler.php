@@ -41,6 +41,6 @@ final class TranslatedStringHandler implements SubscribingHandlerInterface
 
   public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedString $value, array $type, Context $context): array
   {
-    return $value->getValues() ?? [];
+    return $value->getValues();
   }
 }
