@@ -62,8 +62,8 @@ final class TranslatedAddressHandler implements SubscribingHandlerInterface
         return $translatedAddress;
     }
 
-  public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedAddress $value, array $type = NULL, Context $context): array
-  {
-    return $visitor->visitArray($value->getAddresses(), []);
-  }
+    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedAddress $value, array $type = null, Context $context): array
+    {
+        return $visitor->visitArray($value->getAddresses(), []);
+    }
 }
