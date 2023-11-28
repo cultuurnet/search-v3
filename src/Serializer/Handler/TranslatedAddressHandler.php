@@ -10,6 +10,7 @@ use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonDeserializationVisitor;
+use JMS\Serializer\JsonSerializationVisitor;
 
 final class TranslatedAddressHandler implements SubscribingHandlerInterface
 {
@@ -22,13 +23,18 @@ final class TranslatedAddressHandler implements SubscribingHandlerInterface
                 'type' => TranslatedAddress::class,
                 'method' => 'deserializeStringFromJson',
             ],
+            [
+                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
+                'format' => 'json',
+                'type' => TranslatedAddress::class,
+                'method' => 'serializeFromObject',
+            ],
         ];
     }
 
     public function deserializeStringFromJson(JsonDeserializationVisitor $visitor, $values, array $type, Context $context): TranslatedAddress
     {
         $translatedAddress = new TranslatedAddress();
-
 
         foreach ($values as $key => $value) {
             if (is_array($value)) {
@@ -54,5 +60,10 @@ final class TranslatedAddressHandler implements SubscribingHandlerInterface
         }
 
         return $translatedAddress;
+    }
+
+    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedAddress $value, array $type = null, Context $context): array
+    {
+        return $visitor->visitArray($value->getAddresses(), []);
     }
 }
