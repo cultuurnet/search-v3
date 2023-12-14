@@ -123,13 +123,13 @@ final class Organizer
      * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedString")
      */
     private $description;
-  
+
     /**
      * @var TranslatedString|null
      * @Type("CultuurNet\SearchV3\ValueObjects\TranslatedString")
      */
     private $educationalDescription;
-    
+
     /**
      * @var array
      * @Type("array<CultuurNet\SearchV3\ValueObjects\MediaObject>")
@@ -345,12 +345,12 @@ final class Organizer
     {
         $this->description = $description;
     }
-  
+
     public function getEducationalDescription(): ?TranslatedString
     {
         return $this->educationalDescription;
     }
-    
+
     public function setEducationalDescription(?TranslatedString $educationalDescription): void
     {
         $this->educationalDescription = $educationalDescription;
