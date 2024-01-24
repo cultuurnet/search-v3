@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3;
 
 use CultuurNet\SearchV3\Parameter\CalendarSummary;
+use CultuurNet\SearchV3\Parameter\EmbedUitpasPrices;
 use CultuurNet\SearchV3\Parameter\Facet;
 use CultuurNet\SearchV3\Parameter\Id;
 use CultuurNet\SearchV3\Parameter\Label;
