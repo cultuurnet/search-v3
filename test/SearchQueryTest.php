@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3;
 
 use CultuurNet\SearchV3\Parameter\CalendarSummary;
+use CultuurNet\SearchV3\Parameter\EmbedUitpasPrices;
 use CultuurNet\SearchV3\Parameter\Facet;
 use CultuurNet\SearchV3\Parameter\Id;
 use CultuurNet\SearchV3\Parameter\Label;
@@ -250,5 +251,30 @@ final class SearchQueryTest extends TestCase
         $result = $this->searchQuery->__toString();
 
         $this->assertEquals($result, $expectedQueryString);
+    }
+
+    public function testAddEmbedUitpasPricesParameter(): void
+    {
+        $this->searchQuery->addParameter(new EmbedUitpasPrices());
+
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
+            'embed' => true,
+            'start' => 10,
+            'limit' => 50,
+            'labels' => 'test-label',
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+            'embedUitpasPrices' => true,
+        ];
+
+        $result = $this->searchQuery->toArray();
+
+        $this->assertEquals($expectedQuery, $result);
     }
 }
