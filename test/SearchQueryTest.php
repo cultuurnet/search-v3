@@ -251,4 +251,29 @@ final class SearchQueryTest extends TestCase
 
         $this->assertEquals($result, $expectedQueryString);
     }
+
+    public function testAddEmbedUitpasPricesParameter(): void
+    {
+        $this->searchQuery->addParameter(new EmbedUitpasPrices());
+
+        $expectedQuery = [
+            'sort' => [
+                'title' => 'asc',
+            ],
+            'embed' => true,
+            'start' => 10,
+            'limit' => 50,
+            'labels' => 'test-label',
+            'facets' => 'regions',
+            'embedCalendarSummaries' => [
+                'md-html',
+                'lg-text',
+            ],
+            'embedUitpasPrices' => true,
+        ];
+
+        $result = $this->searchQuery->toArray();
+
+        $this->assertEquals($expectedQuery, $result);
+    }
 }
