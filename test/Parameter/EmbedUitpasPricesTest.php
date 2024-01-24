@@ -6,7 +6,7 @@ namespace CultuurNet\SearchV3\Parameter;
 
 use PHPUnit\Framework\TestCase;
 
-final class EmbedUitpasPrices extends TestCase
+final class EmbedUitpasPricesTest extends TestCase
 {
     public function testConstructor(): void
     {
