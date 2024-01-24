@@ -253,7 +253,7 @@ final class SearchQueryTest extends TestCase
         $this->assertEquals($result, $expectedQueryString);
     }
 
-    public function testAddEmbedUitpasPricesParameter(): variant_mod
+    public function testAddEmbedUitpasPricesParameter(): void
     {
         $this->searchQuery->addParameter(new EmbedUitpasPrices());
 
