@@ -58,7 +58,7 @@ final class FacetResults implements \Iterator
         next($this->facetResults);
     }
 
-    public function key(): int|string|null
+    public function key(): mixed
     {
         return key($this->facetResults);
     }
