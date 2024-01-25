@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use CultuurNet\SearchV3\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
 final class FacetResultsTest extends TestCase
@@ -18,7 +19,8 @@ final class FacetResultsTest extends TestCase
     public function setUp(): void
     {
         $this->facetJson = file_get_contents(__DIR__ . '/data/facetResults.json');
-        $this->facetResults = new FacetResults();
+        $serializer = new Serializer();
+        $this->facetResults = $serializer->deserialize($this->facetJson, FacetResults::class);
     }
 
     private function deserializeFacilitiesTestData(array $results): array
