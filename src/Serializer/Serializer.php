@@ -58,7 +58,7 @@ final class Serializer implements SerializerInterface
         return $this->serializer->serialize($object, 'json', $serializationContext);
     }
 
-    public function deserialize(string $jsonString, string $class = PagedCollection::class): mixed
+    public function deserialize(string $jsonString, string $class = PagedCollection::class)
     {
         $deserializationContext = DeserializationContext::create();
 

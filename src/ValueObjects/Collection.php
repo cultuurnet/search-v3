@@ -18,7 +18,7 @@ final class Collection
         $this->items = $items;
     }
 
-    public function addItem(mixed $object): void
+    public function addItem($object): void
     {
         $this->items[] = $object;
     }
