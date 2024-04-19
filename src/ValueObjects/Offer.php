@@ -515,21 +515,21 @@ abstract class Offer
 
     public function getAvailableFrom(): ?DateTime
     {
-      return $this->availableFrom;
+        return $this->availableFrom;
     }
 
     public function setAvailableFrom(?DateTime $availableFrom): void
     {
-      $this->availableFrom = $availableFrom;
+        $this->availableFrom = $availableFrom;
     }
 
     public function getAvailableTo(): ?DateTime
     {
-      return $this->availableTo;
+        return $this->availableTo;
     }
 
     public function setAvailableTo(?DateTime $availableTo): void
     {
-      $this->availableTo = $availableTo;
+        $this->availableTo = $availableTo;
     }
 }
