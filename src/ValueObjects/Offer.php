@@ -174,6 +174,18 @@ abstract class Offer
      */
     private $status;
 
+    /**
+     * @var DateTime|null
+     * @Type("DateTime")
+     */
+    private $availableFrom = null;
+
+    /**
+     * @var DateTime|null
+     * @Type("DateTime")
+     */
+    private $availableTo = null;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -499,5 +511,25 @@ abstract class Offer
     public function setStatus(Status $status): void
     {
         $this->status = $status;
+    }
+
+    public function getAvailableFrom(): ?DateTime
+    {
+      return $this->availableFrom;
+    }
+
+    public function setAvailableFrom(?DateTime $availableFrom): void
+    {
+      $this->availableFrom = $availableFrom;
+    }
+
+    public function getAvailableTo(): ?DateTime
+    {
+      return $this->availableTo;
+    }
+
+    public function setAvailableTo(?DateTime $availableTo): void
+    {
+      $this->availableTo = $availableTo;
     }
 }
