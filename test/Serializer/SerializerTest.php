@@ -134,6 +134,9 @@ final class SerializerTest extends TestCase
             ],
         ]));
 
+        $event->setAvailableFrom(new \DateTime('2021-01-13T12:00:38+01:00'));
+        $event->setAvailableTo(new \DateTime('2021-03-04T22:59:59+00:00'));
+
         $event->setStatus(
             new Status(
                 'Available',
@@ -267,6 +270,8 @@ final class SerializerTest extends TestCase
         $location->setAddress($addresses);
 
         $location->setCalendarType('permanent');
+        $location->setAvailableFrom(new \DateTime('2013-10-19T01:19:59+02:00'));
+        $location->setAvailableTo(new \DateTime('2100-01-01T00:00:00+00:00'));
 
         $locationTerm = new Term();
         $locationTerm->setId('0.8.0.0.0');
