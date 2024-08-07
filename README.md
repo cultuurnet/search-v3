@@ -2,6 +2,8 @@
 
 This PHP library allows you to integrate with publiq's Search API3.
 
+For legacy purposes, we also maintain a separate branch `main-php7`, if you need compability with PHP 7.4.
+
 Full API documentation: https://docs.publiq.be/docs/uitdatabank/search-api/introduction <br />
 Getting an API key: https://platform.publiq.be
 
@@ -100,7 +102,3 @@ $searchQuery->addParameter(new CultuurNet\SearchV3\Parameter\Label('foo'));
 $searchQuery->addParameter(new CultuurNet\SearchV3\Parameter\Label('bar'));
 // Will return only results that have both labels.
 ```
-
-## Legacy
-
-For legacy purposes, we also maintain a branch main-php7 to offer compability with PHP 7.4
