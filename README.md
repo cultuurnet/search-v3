@@ -2,7 +2,7 @@
 
 This PHP library allows you to integrate with publiq's Search API3.
 
-For legacy purposes, we also maintain a separate branch `main-php7`, if you need compability with PHP 7.4.
+For legacy purposes, we also maintain a separate branch `main-php7`, if you need compatibility with PHP 7.4.
 
 Full API documentation: https://docs.publiq.be/docs/uitdatabank/search-api/introduction <br />
 Getting an API key: https://platform.publiq.be
