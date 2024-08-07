@@ -100,3 +100,7 @@ $searchQuery->addParameter(new CultuurNet\SearchV3\Parameter\Label('foo'));
 $searchQuery->addParameter(new CultuurNet\SearchV3\Parameter\Label('bar'));
 // Will return only results that have both labels.
 ```
+
+## Legacy
+
+For legacy purposes, we also maintain a branch main-php7 to offer compability with PHP 7.4
