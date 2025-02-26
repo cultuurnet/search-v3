@@ -15,4 +15,10 @@ final class BookingAvailability
     {
         return $this->type;
     }
+
+    public function setType(Availability $type): void
+    {
+        $this->type = $type;
+    }
+
 }
