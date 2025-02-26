@@ -11,7 +11,7 @@ final class BookingAvailability
 {
     private Availability $type;
 
-    public function getType(): ?string
+    public function getType(): ?Availability
     {
         return $this->type;
     }
