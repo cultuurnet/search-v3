@@ -16,6 +16,18 @@ abstract class Offer
     public const CALENDAR_TYPE_PERMANENT = 'permanent';
 
     /**
+     * @var BookingAvailability|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\BookingAvailability")
+     */
+    private $bookingAvailability;
+
+    /**
+     * @var BookingInfo|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\BookingInfo")
+     */
+    private $bookingInfo;
+
+    /**
      * @var string|null
      * @Type("string")
      * @SerializedName("@id")
@@ -185,6 +197,26 @@ abstract class Offer
      * @Type("DateTime")
      */
     private $availableTo = null;
+
+    public function getBookingAvailability(): ?BookingAvailability
+    {
+        return $this->bookingAvailability;
+    }
+
+    public function setBookingAvailability(?BookingAvailability $bookingAvailability): void
+    {
+        $this->bookingAvailability = $bookingAvailability;
+    }
+
+    public function getBookingInfo(): ?BookingInfo
+    {
+        return $this->bookingInfo;
+    }
+
+    public function setBookingInfo(BookingInfo $bookingInfo): void
+    {
+        $this->bookingInfo = $bookingInfo;
+    }
 
     public function getId(): ?string
     {
