@@ -22,12 +22,6 @@ final class Event extends Offer
     private $priceInfo = [];
 
     /**
-     * @var BookingInfo|null
-     * @Type("CultuurNet\SearchV3\ValueObjects\BookingInfo")
-     */
-    private $bookingInfo;
-
-    /**
      * Sub events exist if an event is organised on multiple days.
      * @var Event[]
      * @Type("array<CultuurNet\SearchV3\ValueObjects\Event>")
@@ -81,16 +75,6 @@ final class Event extends Offer
     public function setPriceInfo(array $priceInfo): void
     {
         $this->priceInfo = $priceInfo;
-    }
-
-    public function getBookingInfo(): ?BookingInfo
-    {
-        return $this->bookingInfo;
-    }
-
-    public function setBookingInfo(BookingInfo $bookingInfo): void
-    {
-        $this->bookingInfo = $bookingInfo;
     }
 
     public function getAttendanceMode(): string

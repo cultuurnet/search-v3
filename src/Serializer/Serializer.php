@@ -13,6 +13,7 @@ use CultuurNet\SearchV3\Serializer\Handler\TranslatedStringHandler;
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use Doctrine\Common\Annotations\AnnotationReader;
 use JMS\Serializer\DeserializationContext;
+use JMS\Serializer\Handler\EnumHandler;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
@@ -30,11 +31,14 @@ final class Serializer implements SerializerInterface
 
     public function __construct()
     {
-        $this->serializer = SerializerBuilder::create()
+        $serializerBuilder = SerializerBuilder::create();
+        $serializerBuilder->enableEnumSupport();
+        $this->serializer = $serializerBuilder
             ->addMetadataDir(SerializerMetadata::directory(), SerializerMetadata::namespacePrefix())
             ->setAnnotationReader(new AnnotationReader())
             ->setPropertyNamingStrategy(new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy()))
             ->configureHandlers(function (HandlerRegistry $registry) {
+                $registry->registerSubscribingHandler(new EnumHandler());
                 $registry->registerSubscribingHandler(new CalendarSummaryHandler());
                 $registry->registerSubscribingHandler(new CollectionHandler());
                 $registry->registerSubscribingHandler(new DateTimeHandler());
