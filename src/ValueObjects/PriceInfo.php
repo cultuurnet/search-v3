@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3\ValueObjects;
 
 use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\SerializedName;
 
 final class PriceInfo
 {
@@ -31,6 +32,13 @@ final class PriceInfo
      * @Type("float")
      */
     private $price;
+
+    /**
+     * @var bool|null
+     * @Type("bool")
+     * @SerializedName("groupPrice")
+     */
+    private $isGroupPrice;
 
     public function getCategory(): ?string
     {
@@ -70,5 +78,15 @@ final class PriceInfo
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function isGroupPrice(): bool
+    {
+        return $this->isGroupPrice ?? false;
+    }
+
+    public function setIsGroupPrice(?bool $isGroupPrice): void
+    {
+        $this->isGroupPrice = $isGroupPrice;
     }
 }
