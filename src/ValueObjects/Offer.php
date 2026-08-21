@@ -133,6 +133,12 @@ abstract class Offer
     private $videos = [];
 
     /**
+     * @var TranslatedFaq[]
+     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaq>")
+     */
+    private $faqs = [];
+
+    /**
      * @var Organizer|null
      * @Type("CultuurNet\SearchV3\ValueObjects\Organizer")
      */
@@ -563,5 +569,21 @@ abstract class Offer
     public function setAvailableTo(?DateTime $availableTo): void
     {
         $this->availableTo = $availableTo;
+    }
+
+    /**
+     * @return TranslatedFaq[]
+     */
+    public function getFaqs(): array
+    {
+        return $this->faqs;
+    }
+
+    /**
+     * @param TranslatedFaq[] $faqs
+     */
+    public function setFaqs(array $faqs): void
+    {
+        $this->faqs = $faqs;
     }
 }
