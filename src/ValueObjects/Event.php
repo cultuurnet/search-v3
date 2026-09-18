@@ -60,11 +60,16 @@ final class Event extends Offer
     private $birthdateRange;
 
     /**
-     * Optional in the api, a missing property means false.
      * @var bool
      * @Type("boolean")
      */
     private $childrenOnly = false;
+
+    /**
+     * @var string[]
+     * @Type("array<string>")
+     */
+    private $departurePlaces = [];
 
     public function getLocation(): ?Place
     {
@@ -156,6 +161,22 @@ final class Event extends Offer
     public function setBirthdateRange(BirthdateRange $birthdateRange): void
     {
         $this->birthdateRange = $birthdateRange;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDeparturePlaces(): array
+    {
+        return $this->departurePlaces;
+    }
+
+    /**
+     * @param string[] $departurePlaces
+     */
+    public function setDeparturePlaces(array $departurePlaces): void
+    {
+        $this->departurePlaces = $departurePlaces;
     }
 
     public function isChildrenOnly(): bool

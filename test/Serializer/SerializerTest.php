@@ -152,6 +152,10 @@ final class SerializerTest extends TestCase
         $event->setAttendanceMode('mixed');
         $event->setOnlineUrl('https://www.livestream.be/');
         $event->setChildrenOnly(true);
+        $event->setDeparturePlaces([
+            'https://io.uitdatabank.be/places/ec797c9e-f9b8-4eab-80c4-21a52bc439c2',
+            'https://io.uitdatabank.be/places/4e62b521-f862-4eba-a71e-d7729d09619b',
+        ]);
         $event->setBirthdateRange(new BirthdateRange('2021-09-18', '2022-09-17'));
 
         $firstFaq = new TranslatedFaq();
