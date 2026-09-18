@@ -72,6 +72,11 @@
       "endDate": "2021-03-04T22:59:59+00:00",
       "attendanceMode": "mixed",
       "onlineUrl": "https://www.livestream.be/",
+      "childrenOnly": true,
+      "birthdateRange": {
+        "from": "2021-09-18",
+        "to": "2022-09-17"
+      },
       "faqs": [
         {
           "nl": {
