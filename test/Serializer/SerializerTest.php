@@ -11,6 +11,7 @@ use CultuurNet\SearchV3\ValueObjects\Collection;
 use CultuurNet\SearchV3\ValueObjects\ContactPoint;
 use CultuurNet\SearchV3\ValueObjects\Event;
 use CultuurNet\SearchV3\ValueObjects\FacetResult;
+use CultuurNet\SearchV3\ValueObjects\Faq;
 use CultuurNet\SearchV3\ValueObjects\FacetResultItem;
 use CultuurNet\SearchV3\ValueObjects\FacetResults;
 use CultuurNet\SearchV3\ValueObjects\GeoPoint;
@@ -22,6 +23,7 @@ use CultuurNet\SearchV3\ValueObjects\PriceInfo;
 use CultuurNet\SearchV3\ValueObjects\Status;
 use CultuurNet\SearchV3\ValueObjects\Term;
 use CultuurNet\SearchV3\ValueObjects\TranslatedAddress;
+use CultuurNet\SearchV3\ValueObjects\TranslatedFaq;
 use CultuurNet\SearchV3\ValueObjects\TranslatedString;
 use CultuurNet\SearchV3\ValueObjects\Video;
 use PHPUnit\Framework\TestCase;
@@ -148,6 +150,15 @@ final class SerializerTest extends TestCase
 
         $event->setAttendanceMode('mixed');
         $event->setOnlineUrl('https://www.livestream.be/');
+
+        $firstFaq = new TranslatedFaq();
+        $firstFaq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));
+        $firstFaq->addFaq('fr', new Faq('Comment m\'y rendre?', '<p>A pied!</p>'));
+
+        $secondFaq = new TranslatedFaq();
+        $secondFaq->addFaq('nl', new Faq('Wat moet ik meebrengen?', '<p>Nada, er is eten voorzien.</p>'));
+
+        $event->setFaqs([$firstFaq, $secondFaq]);
 
         $subEvent1 = new Event();
         $subEvent1->setStatus(new Status('Available'));

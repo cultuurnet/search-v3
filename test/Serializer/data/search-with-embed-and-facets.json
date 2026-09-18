@@ -72,6 +72,24 @@
       "endDate": "2021-03-04T22:59:59+00:00",
       "attendanceMode": "mixed",
       "onlineUrl": "https://www.livestream.be/",
+      "faqs": [
+        {
+          "nl": {
+            "question": "Hoe kom ik er?",
+            "answer": "<p>Wandelen!</p>"
+          },
+          "fr": {
+            "question": "Comment m'y rendre?",
+            "answer": "<p>A pied!</p>"
+          }
+        },
+        {
+          "nl": {
+            "question": "Wat moet ik meebrengen?",
+            "answer": "<p>Nada, er is eten voorzien.</p>"
+          }
+        }
+      ],
       "status": {
         "type": "Available",
         "reason": {
