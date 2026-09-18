@@ -6,6 +6,7 @@ namespace CultuurNet\SearchV3\Serializer;
 
 use CultuurNet\SearchV3\ValueObjects\Address;
 use CultuurNet\SearchV3\ValueObjects\Audience;
+use CultuurNet\SearchV3\ValueObjects\BirthdateRange;
 use CultuurNet\SearchV3\ValueObjects\CalendarSummary;
 use CultuurNet\SearchV3\ValueObjects\Collection;
 use CultuurNet\SearchV3\ValueObjects\ContactPoint;
@@ -150,6 +151,8 @@ final class SerializerTest extends TestCase
 
         $event->setAttendanceMode('mixed');
         $event->setOnlineUrl('https://www.livestream.be/');
+        $event->setChildrenOnly(true);
+        $event->setBirthdateRange(new BirthdateRange('2021-09-18', '2022-09-17'));
 
         $firstFaq = new TranslatedFaq();
         $firstFaq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));

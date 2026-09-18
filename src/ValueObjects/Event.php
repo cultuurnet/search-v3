@@ -53,6 +53,19 @@ final class Event extends Offer
      */
     private $faqs = [];
 
+    /**
+     * @var BirthdateRange|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\BirthdateRange")
+     */
+    private $birthdateRange;
+
+    /**
+     * Optional in the api, a missing property means false.
+     * @var bool
+     * @Type("boolean")
+     */
+    private $childrenOnly = false;
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -133,6 +146,26 @@ final class Event extends Offer
     public function setFaqs(array $faqs): void
     {
         $this->faqs = $faqs;
+    }
+
+    public function getBirthdateRange(): ?BirthdateRange
+    {
+        return $this->birthdateRange;
+    }
+
+    public function setBirthdateRange(BirthdateRange $birthdateRange): void
+    {
+        $this->birthdateRange = $birthdateRange;
+    }
+
+    public function isChildrenOnly(): bool
+    {
+        return (bool) $this->childrenOnly;
+    }
+
+    public function setChildrenOnly(bool $childrenOnly): void
+    {
+        $this->childrenOnly = $childrenOnly;
     }
 
     public function isAttendanceModeOnline(): bool

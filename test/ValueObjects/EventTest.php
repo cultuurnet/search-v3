@@ -52,6 +52,27 @@ final class EventTest extends TestCase
         $this->assertEquals([$faq], $this->event->getFaqs());
     }
 
+    public function testChildrenOnlyDefaultsToFalse(): void
+    {
+        $this->assertFalse($this->event->isChildrenOnly());
+    }
+
+    public function testChildrenOnlyGetterAndSetter(): void
+    {
+        $this->event->setChildrenOnly(true);
+
+        $this->assertTrue($this->event->isChildrenOnly());
+    }
+
+    public function testGetBirthdateRangeMethod(): void
+    {
+        $birthdateRange = new BirthdateRange('2021-09-18', '2022-09-17');
+
+        $this->event->setBirthdateRange($birthdateRange);
+
+        $this->assertEquals($birthdateRange, $this->event->getBirthdateRange());
+    }
+
     public function testGetPriceInfoMethod(): void
     {
         $priceInfo = new PriceInfo();
