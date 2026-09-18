@@ -42,6 +42,16 @@ final class EventTest extends TestCase
         $this->assertEquals([new Event(), new Event()], $result);
     }
 
+    public function testGetFaqsMethod(): void
+    {
+        $faq = new TranslatedFaq();
+        $faq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));
+
+        $this->event->setFaqs([$faq]);
+
+        $this->assertEquals([$faq], $this->event->getFaqs());
+    }
+
     public function testGetPriceInfoMethod(): void
     {
         $priceInfo = new PriceInfo();

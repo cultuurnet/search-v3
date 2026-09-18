@@ -41,6 +41,12 @@ final class Event extends Offer
      */
     private $onlineUrl;
 
+    /**
+     * @var TranslatedFaq[]
+     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaq>")
+     */
+    private $faqs = [];
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -95,6 +101,22 @@ final class Event extends Offer
     public function setOnlineUrl(?string $onlineUrl): void
     {
         $this->onlineUrl = $onlineUrl;
+    }
+
+    /**
+     * @return TranslatedFaq[]
+     */
+    public function getFaqs(): array
+    {
+        return $this->faqs;
+    }
+
+    /**
+     * @param TranslatedFaq[] $faqs
+     */
+    public function setFaqs(array $faqs): void
+    {
+        $this->faqs = $faqs;
     }
 
     public function isAttendanceModeOnline(): bool
