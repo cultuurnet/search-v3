@@ -16,27 +16,15 @@ final class FaqTest extends TestCase
         $this->assertEquals('<p>Wandelen!</p>', $faq->getAnswer());
     }
 
-    public function testEmptyConstructor(): void
+    public function testQuestionGetter(): void
     {
-        $faq = new Faq();
-
-        $this->assertNull($faq->getQuestion());
-        $this->assertNull($faq->getAnswer());
-    }
-
-    public function testQuestionGetterAndSetter(): void
-    {
-        $faq = new Faq();
-        $faq->setQuestion('Hoe kom ik er?');
-
+        $faq = new Faq('Hoe kom ik er?', '<p>Wandelen!</p>');
         $this->assertEquals('Hoe kom ik er?', $faq->getQuestion());
     }
 
-    public function testAnswerGetterAndSetter(): void
+    public function testAnswerGetter(): void
     {
-        $faq = new Faq();
-        $faq->setAnswer('<p>Wandelen!</p>');
-
+        $faq = new Faq('Hoe kom ik er?', '<p>Wandelen!</p>');
         $this->assertEquals('<p>Wandelen!</p>', $faq->getAnswer());
     }
 }

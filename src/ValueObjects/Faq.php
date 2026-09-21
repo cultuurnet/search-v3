@@ -9,24 +9,24 @@ use JMS\Serializer\Annotation\Type;
 final class Faq
 {
     /**
-     * @var string|null
+     * @var string
      * @Type("string")
      */
     private $question;
 
     /**
-     * @var string|null
+     * @var string
      * @Type("string")
      */
     private $answer;
 
-    public function __construct(?string $question = null, ?string $answer = null)
+    public function __construct(string $question, string $answer)
     {
         $this->question = $question;
         $this->answer = $answer;
     }
 
-    public function getQuestion(): ?string
+    public function getQuestion(): string
     {
         return $this->question;
     }
@@ -36,7 +36,7 @@ final class Faq
         $this->question = $question;
     }
 
-    public function getAnswer(): ?string
+    public function getAnswer(): string
     {
         return $this->answer;
     }
