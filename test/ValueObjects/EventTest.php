@@ -44,7 +44,7 @@ final class EventTest extends TestCase
 
     public function testGetFaqsMethod(): void
     {
-        $faq = new TranslatedFaq();
+        $faq = new TranslatedFaqs();
         $faq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));
 
         $this->event->setFaqs([$faq]);

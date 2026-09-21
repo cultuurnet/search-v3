@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
-final class TranslatedFaq
+final class TranslatedFaqs
 {
     /**
      * @var Faq[]

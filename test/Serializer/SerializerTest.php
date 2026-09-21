@@ -24,7 +24,7 @@ use CultuurNet\SearchV3\ValueObjects\PriceInfo;
 use CultuurNet\SearchV3\ValueObjects\Status;
 use CultuurNet\SearchV3\ValueObjects\Term;
 use CultuurNet\SearchV3\ValueObjects\TranslatedAddress;
-use CultuurNet\SearchV3\ValueObjects\TranslatedFaq;
+use CultuurNet\SearchV3\ValueObjects\TranslatedFaqs;
 use CultuurNet\SearchV3\ValueObjects\TranslatedString;
 use CultuurNet\SearchV3\ValueObjects\Video;
 use PHPUnit\Framework\TestCase;
@@ -158,11 +158,11 @@ final class SerializerTest extends TestCase
         ]);
         $event->setBirthdateRange(new BirthdateRange('2021-09-18', '2022-09-17'));
 
-        $firstFaq = new TranslatedFaq();
+        $firstFaq = new TranslatedFaqs();
         $firstFaq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));
         $firstFaq->addFaq('fr', new Faq('Comment m\'y rendre?', '<p>A pied!</p>'));
 
-        $secondFaq = new TranslatedFaq();
+        $secondFaq = new TranslatedFaqs();
         $secondFaq->addFaq('nl', new Faq('Wat moet ik meebrengen?', '<p>Nada, er is eten voorzien.</p>'));
 
         $event->setFaqs([$firstFaq, $secondFaq]);

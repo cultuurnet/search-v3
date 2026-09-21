@@ -10,13 +10,13 @@ use PHPUnit\Framework\TestCase;
 final class TranslatedFaqTest extends TestCase
 {
     /**
-     * @var TranslatedFaq
+     * @var TranslatedFaqs
      */
     protected $faq;
 
     public function setUp(): void
     {
-        $this->faq = new TranslatedFaq();
+        $this->faq = new TranslatedFaqs();
     }
 
     public function testGetFaqsMethod(): void
@@ -67,8 +67,8 @@ final class TranslatedFaqTest extends TestCase
         ]);
 
         $serializer = new Serializer();
-        /** @var TranslatedFaq $faq */
-        $faq = $serializer->deserialize($jsonString, TranslatedFaq::class);
+        /** @var TranslatedFaqs $faq */
+        $faq = $serializer->deserialize($jsonString, TranslatedFaqs::class);
 
         $this->assertEquals('Hoe kom ik er?', $faq->getFaqForLanguage('nl')->getQuestion());
         $this->assertEquals('<p>A pied!</p>', $faq->getFaqForLanguage('fr')->getAnswer());
