@@ -42,6 +42,54 @@ final class EventTest extends TestCase
         $this->assertEquals([new Event(), new Event()], $result);
     }
 
+    public function testGetFaqsMethod(): void
+    {
+        $faq = new TranslatedFaqs();
+        $faq->addFaq('nl', new Faq('Hoe kom ik er?', '<p>Wandelen!</p>'));
+
+        $this->event->setFaqs([$faq]);
+
+        $this->assertEquals([$faq], $this->event->getFaqs());
+    }
+
+    public function testGetDeparturePlacesMethod(): void
+    {
+        $departurePlaces = [
+            'https://io.uitdatabank.be/places/ec797c9e-f9b8-4eab-80c4-21a52bc439c2',
+            'https://io.uitdatabank.be/places/4e62b521-f862-4eba-a71e-d7729d09619b',
+        ];
+
+        $this->event->setDeparturePlaces($departurePlaces);
+
+        $this->assertEquals($departurePlaces, $this->event->getDeparturePlaces());
+    }
+
+    public function testDeparturePlacesDefaultsToEmptyArray(): void
+    {
+        $this->assertEquals([], $this->event->getDeparturePlaces());
+    }
+
+    public function testChildrenOnlyDefaultsToFalse(): void
+    {
+        $this->assertFalse($this->event->isChildrenOnly());
+    }
+
+    public function testChildrenOnlyGetterAndSetter(): void
+    {
+        $this->event->setChildrenOnly(true);
+
+        $this->assertTrue($this->event->isChildrenOnly());
+    }
+
+    public function testGetBirthdateRangeMethod(): void
+    {
+        $birthdateRange = new BirthdateRange('2021-09-18', '2022-09-17');
+
+        $this->event->setBirthdateRange($birthdateRange);
+
+        $this->assertEquals($birthdateRange, $this->event->getBirthdateRange());
+    }
+
     public function testGetPriceInfoMethod(): void
     {
         $priceInfo = new PriceInfo();

@@ -18,6 +18,7 @@ final class CalendarSummaryFormat
         'sm',
         'md',
         'lg',
+        'xl',
     ];
 
     /**

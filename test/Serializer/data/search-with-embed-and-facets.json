@@ -72,6 +72,33 @@
       "endDate": "2021-03-04T22:59:59+00:00",
       "attendanceMode": "mixed",
       "onlineUrl": "https://www.livestream.be/",
+      "childrenOnly": true,
+      "departurePlaces": [
+        "https://io.uitdatabank.be/places/ec797c9e-f9b8-4eab-80c4-21a52bc439c2",
+        "https://io.uitdatabank.be/places/4e62b521-f862-4eba-a71e-d7729d09619b"
+      ],
+      "birthdateRange": {
+        "from": "2021-09-18",
+        "to": "2022-09-17"
+      },
+      "faqs": [
+        {
+          "nl": {
+            "question": "Hoe kom ik er?",
+            "answer": "<p>Wandelen!</p>"
+          },
+          "fr": {
+            "question": "Comment m'y rendre?",
+            "answer": "<p>A pied!</p>"
+          }
+        },
+        {
+          "nl": {
+            "question": "Wat moet ik meebrengen?",
+            "answer": "<p>Nada, er is eten voorzien.</p>"
+          }
+        }
+      ],
       "status": {
         "type": "Available",
         "reason": {
