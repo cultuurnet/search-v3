@@ -7,7 +7,7 @@ namespace CultuurNet\SearchV3\ValueObjects;
 use CultuurNet\SearchV3\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
-final class TranslatedFaqTest extends TestCase
+final class TranslatedFaqsTest extends TestCase
 {
     /**
      * @var TranslatedFaqs
