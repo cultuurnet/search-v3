@@ -42,7 +42,7 @@ final class Event extends Offer
     private $onlineUrl;
 
     /**
-     * @var TranslatedFaq[]
+     * @var TranslatedFaqs[]
      * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaq>")
      */
     private $faqs = [];
@@ -122,7 +122,7 @@ final class Event extends Offer
     }
 
     /**
-     * @return TranslatedFaq[]
+     * @return TranslatedFaqs[]
      */
     public function getFaqs(): array
     {
@@ -130,7 +130,7 @@ final class Event extends Offer
     }
 
     /**
-     * @param TranslatedFaq[] $faqs
+     * @param TranslatedFaqs[] $faqs
      */
     public function setFaqs(array $faqs): void
     {

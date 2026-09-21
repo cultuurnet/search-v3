@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace CultuurNet\SearchV3\Serializer\Handler;
 
 use CultuurNet\SearchV3\ValueObjects\Faq;
-use CultuurNet\SearchV3\ValueObjects\TranslatedFaq;
+use CultuurNet\SearchV3\ValueObjects\TranslatedFaqs;
 use JMS\Serializer\Context;
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
@@ -20,21 +20,21 @@ final class TranslatedFaqsHandler implements SubscribingHandlerInterface
             [
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
-                'type' => TranslatedFaq::class,
+                'type' => TranslatedFaqs::class,
                 'method' => 'deserializeFaqFromJson',
             ],
             [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'json',
-                'type' => TranslatedFaq::class,
+                'type' => TranslatedFaqs::class,
                 'method' => 'serializeFromObject',
             ],
         ];
     }
 
-    public function deserializeFaqFromJson(JsonDeserializationVisitor $visitor, array $values, array $type, Context $context): TranslatedFaq
+    public function deserializeFaqFromJson(JsonDeserializationVisitor $visitor, array $values, array $type, Context $context): TranslatedFaqs
     {
-        $translatedFaq = new TranslatedFaq();
+        $translatedFaq = new TranslatedFaqs();
 
         foreach ($values as $key => $value) {
             if (is_array($value)) {
@@ -51,7 +51,7 @@ final class TranslatedFaqsHandler implements SubscribingHandlerInterface
         return $translatedFaq;
     }
 
-    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedFaq $value, Context $context, array $type = null): array
+    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedFaqs $value, Context $context, array $type = null): array
     {
         return $visitor->visitArray($value->getFaqs(), []);
     }
