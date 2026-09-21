@@ -32,7 +32,7 @@ final class TranslatedFaqHandler implements SubscribingHandlerInterface
         ];
     }
 
-    public function deserializeFaqFromJson(JsonDeserializationVisitor $visitor, $values, array $type, Context $context): TranslatedFaq
+    public function deserializeFaqFromJson(JsonDeserializationVisitor $visitor, array $values, array $type, Context $context): TranslatedFaq
     {
         $translatedFaq = new TranslatedFaq();
 
