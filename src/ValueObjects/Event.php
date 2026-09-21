@@ -43,7 +43,7 @@ final class Event extends Offer
 
     /**
      * @var TranslatedFaqs[]
-     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaq>")
+     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaqs>")
      */
     private $faqs = [];
 
