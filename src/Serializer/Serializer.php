@@ -9,7 +9,7 @@ use CultuurNet\SearchV3\Serializer\Handler\CollectionHandler;
 use CultuurNet\SearchV3\Serializer\Handler\DateTimeHandler;
 use CultuurNet\SearchV3\Serializer\Handler\FacetResultsHandler;
 use CultuurNet\SearchV3\Serializer\Handler\TranslatedAddressHandler;
-use CultuurNet\SearchV3\Serializer\Handler\TranslatedFaqHandler;
+use CultuurNet\SearchV3\Serializer\Handler\TranslatedFaqsHandler;
 use CultuurNet\SearchV3\Serializer\Handler\TranslatedStringHandler;
 use CultuurNet\SearchV3\ValueObjects\PagedCollection;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -42,7 +42,7 @@ final class Serializer implements SerializerInterface
                 $registry->registerSubscribingHandler(new FacetResultsHandler());
                 $registry->registerSubscribingHandler(new TranslatedStringHandler());
                 $registry->registerSubscribingHandler(new TranslatedAddressHandler());
-                $registry->registerSubscribingHandler(new TranslatedFaqHandler());
+                $registry->registerSubscribingHandler(new TranslatedFaqsHandler());
             })
             ->build();
     }
