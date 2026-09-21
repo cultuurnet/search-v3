@@ -12,7 +12,7 @@ use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\JsonSerializationVisitor;
 
-final class TranslatedFaqHandler implements SubscribingHandlerInterface
+final class TranslatedFaqsHandler implements SubscribingHandlerInterface
 {
     public static function getSubscribingMethods(): array
     {
