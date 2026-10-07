@@ -71,6 +71,12 @@ final class Event extends Offer
      */
     private $departurePlaces = [];
 
+    /**
+     * @var bool|null
+     * @Type("boolean")
+     */
+    private $hasOvernightStay;
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -187,6 +193,16 @@ final class Event extends Offer
     public function setChildrenOnly(bool $childrenOnly): void
     {
         $this->childrenOnly = $childrenOnly;
+    }
+
+    public function hasOvernightStay(): ?bool
+    {
+        return $this->hasOvernightStay;
+    }
+
+    public function setHasOvernightStay(bool $hasOvernightStay): void
+    {
+        $this->hasOvernightStay = $hasOvernightStay;
     }
 
     public function isAttendanceModeOnline(): bool
