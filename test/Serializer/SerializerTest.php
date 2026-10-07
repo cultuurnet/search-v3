@@ -171,6 +171,7 @@ final class SerializerTest extends TestCase
         $subEvent1->setStatus(new Status('Available'));
         $subEvent1->setStartDate(new \DateTime('2021-01-21T23:00:00+00:00'));
         $subEvent1->setEndDate(new \DateTime('2021-01-22T22:59:59+00:00'));
+        $subEvent1->setHasOvernightStay(true);
 
         $subEvent2 = new Event();
         $subEvent2->setStatus(
