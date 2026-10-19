@@ -10,6 +10,9 @@ use CultuurNet\SearchV3\Parameter\Facet;
 use CultuurNet\SearchV3\Parameter\Id;
 use CultuurNet\SearchV3\Parameter\Label;
 use CultuurNet\SearchV3\Parameter\Query;
+use CultuurNet\SearchV3\Parameter\RecurringOnDayOfWeek;
+use CultuurNet\SearchV3\Parameter\RecurringOnLocalTimeFrom;
+use CultuurNet\SearchV3\Parameter\RecurringOnLocalTimeTo;
 use CultuurNet\SearchV3\ValueObjects\CalendarSummaryFormat;
 use PHPUnit\Framework\TestCase;
 
@@ -276,5 +279,20 @@ final class SearchQueryTest extends TestCase
         $result = $this->searchQuery->toArray();
 
         $this->assertEquals($expectedQuery, $result);
+    }
+
+    public function testRecurringParametersToString(): void
+    {
+        $searchQuery = new SearchQuery();
+        $searchQuery->addParameter(
+            new RecurringOnDayOfWeek(RecurringOnDayOfWeek::WEDNESDAY, RecurringOnDayOfWeek::SATURDAY)
+        );
+        $searchQuery->addParameter(new RecurringOnLocalTimeFrom(1300));
+        $searchQuery->addParameter(new RecurringOnLocalTimeTo(1600));
+
+        $this->assertEquals(
+            'recurringOnDayOfWeek=wednesday,saturday&recurringOnLocalTimeFrom=1300&recurringOnLocalTimeTo=1600',
+            $searchQuery->__toString()
+        );
     }
 }
