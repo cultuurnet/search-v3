@@ -77,6 +77,13 @@ final class Event extends Offer
      */
     private $hasOvernightStay;
 
+    /**
+     * Childcare hours, only present on sub events.
+     * @var Childcare|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\Childcare")
+     */
+    private $childcare;
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -203,6 +210,16 @@ final class Event extends Offer
     public function setHasOvernightStay(bool $hasOvernightStay): void
     {
         $this->hasOvernightStay = $hasOvernightStay;
+    }
+
+    public function getChildcare(): ?Childcare
+    {
+        return $this->childcare;
+    }
+
+    public function setChildcare(Childcare $childcare): void
+    {
+        $this->childcare = $childcare;
     }
 
     public function isAttendanceModeOnline(): bool
