@@ -93,6 +93,20 @@ final class EventTest extends TestCase
         $this->assertTrue($this->event->hasOvernightStay());
     }
 
+    public function testChildcareDefaultsToNull(): void
+    {
+        $this->assertNull($this->event->getChildcare());
+    }
+
+    public function testChildcareGetterAndSetter(): void
+    {
+        $childcare = new Childcare('11:00', '15:00');
+
+        $this->event->setChildcare($childcare);
+
+        $this->assertEquals($childcare, $this->event->getChildcare());
+    }
+
     public function testGetBirthdateRangeMethod(): void
     {
         $birthdateRange = new BirthdateRange('2021-09-18', '2022-09-17');
