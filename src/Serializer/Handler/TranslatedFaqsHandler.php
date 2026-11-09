@@ -51,7 +51,7 @@ final class TranslatedFaqsHandler implements SubscribingHandlerInterface
         return $translatedFaq;
     }
 
-    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedFaqs $value, Context $context, array $type = null): array
+    public function serializeFromObject(JsonSerializationVisitor $visitor, TranslatedFaqs $value, array $type, Context $context): array
     {
         return $visitor->visitArray($value->getFaqs(), ['name' => 'array', 'params' => []]);
     }
