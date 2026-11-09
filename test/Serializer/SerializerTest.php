@@ -57,6 +57,16 @@ final class SerializerTest extends TestCase
         $this->assertEquals($expectedAddress, $result);
     }
 
+    public function testSerializeTranslatedFaqs(): void
+    {
+        $faqs = new TranslatedFaqs();
+        $faqs->addFaq('nl', new Faq('Is er parking?', 'Ja, achter het gebouw.'));
+
+        $result = $this->serializer->serialize($faqs);
+
+        $this->assertEquals('{"nl":{"question":"Is er parking?","answer":"Ja, achter het gebouw."}}', $result);
+    }
+
     public function testDeserializeMethodForResultsWithoutEmbed(): void
     {
         $jsonString = file_get_contents(__DIR__ . '/data/search-without-embed.json');
