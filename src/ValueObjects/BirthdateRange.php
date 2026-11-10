@@ -10,17 +10,15 @@ final class BirthdateRange
 {
     /**
      * Date in Y-m-d format.
-     * @var string|null
      * @Type("string")
      */
-    private $from;
+    private ?string $from = null;
 
     /**
      * Date in Y-m-d format.
-     * @var string|null
      * @Type("string")
      */
-    private $to;
+    private ?string $to = null;
 
     public function __construct(?string $from = null, ?string $to = null)
     {
