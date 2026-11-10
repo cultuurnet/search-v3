@@ -41,6 +41,43 @@ final class Event extends Offer
      */
     private $onlineUrl;
 
+    /**
+     * @var TranslatedFaqs[]
+     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaqs>")
+     */
+    private $faqs = [];
+
+    /**
+     * @var BirthdateRange|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\BirthdateRange")
+     */
+    private $birthdateRange;
+
+    /**
+     * @var bool
+     * @Type("boolean")
+     */
+    private $childrenOnly = false;
+
+    /**
+     * @var string[]
+     * @Type("array<string>")
+     */
+    private $departurePlaces = [];
+
+    /**
+     * @var bool|null
+     * @Type("boolean")
+     */
+    private $hasOvernightStay;
+
+    /**
+     * Childcare hours, only present on sub events.
+     * @var Childcare|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\Childcare")
+     */
+    private $childcare;
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -95,6 +132,78 @@ final class Event extends Offer
     public function setOnlineUrl(?string $onlineUrl): void
     {
         $this->onlineUrl = $onlineUrl;
+    }
+
+    /**
+     * @return TranslatedFaqs[]
+     */
+    public function getFaqs(): array
+    {
+        return $this->faqs;
+    }
+
+    /**
+     * @param TranslatedFaqs[] $faqs
+     */
+    public function setFaqs(array $faqs): void
+    {
+        $this->faqs = $faqs;
+    }
+
+    public function getBirthdateRange(): ?BirthdateRange
+    {
+        return $this->birthdateRange;
+    }
+
+    public function setBirthdateRange(BirthdateRange $birthdateRange): void
+    {
+        $this->birthdateRange = $birthdateRange;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDeparturePlaces(): array
+    {
+        return $this->departurePlaces;
+    }
+
+    /**
+     * @param string[] $departurePlaces
+     */
+    public function setDeparturePlaces(array $departurePlaces): void
+    {
+        $this->departurePlaces = $departurePlaces;
+    }
+
+    public function isChildrenOnly(): bool
+    {
+        return (bool) $this->childrenOnly;
+    }
+
+    public function setChildrenOnly(bool $childrenOnly): void
+    {
+        $this->childrenOnly = $childrenOnly;
+    }
+
+    public function hasOvernightStay(): ?bool
+    {
+        return $this->hasOvernightStay;
+    }
+
+    public function setHasOvernightStay(bool $hasOvernightStay): void
+    {
+        $this->hasOvernightStay = $hasOvernightStay;
+    }
+
+    public function getChildcare(): ?Childcare
+    {
+        return $this->childcare;
+    }
+
+    public function setChildcare(Childcare $childcare): void
+    {
+        $this->childcare = $childcare;
     }
 
     public function isAttendanceModeOnline(): bool
