@@ -26,6 +26,6 @@ final class CalendarSummaryFormatTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new CalendarSummaryFormat('html', 'xl');
+        new CalendarSummaryFormat('html', 'xxl');
     }
 }
