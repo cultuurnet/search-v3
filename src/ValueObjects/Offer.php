@@ -133,8 +133,8 @@ abstract class Offer
     private $videos = [];
 
     /**
-     * @var TranslatedFaq[]
-     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaq>")
+     * @var TranslatedFaqs[]
+     * @Type("array<CultuurNet\SearchV3\ValueObjects\TranslatedFaqs>")
      */
     private $faqs = [];
 
@@ -572,7 +572,7 @@ abstract class Offer
     }
 
     /**
-     * @return TranslatedFaq[]
+     * @return TranslatedFaqs[]
      */
     public function getFaqs(): array
     {
@@ -580,7 +580,7 @@ abstract class Offer
     }
 
     /**
-     * @param TranslatedFaq[] $faqs
+     * @param TranslatedFaqs[] $faqs
      */
     public function setFaqs(array $faqs): void
     {

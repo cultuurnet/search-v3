@@ -12,13 +12,11 @@ final class BookingAvailability
     private Availability $type;
 
     /**
-     * @var int|null
      * @Type("integer")
      */
     private ?int $capacity = null;
 
     /**
-     * @var int|null
      * @Type("integer")
      */
     private ?int $remainingCapacity = null;
