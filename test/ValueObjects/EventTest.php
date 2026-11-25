@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\ValueObjects;
 
+use CultuurNet\SearchV3\Enum\Availability;
 use PHPUnit\Framework\TestCase;
 
 final class EventTest extends TestCase
@@ -105,6 +106,22 @@ final class EventTest extends TestCase
         $this->event->setChildcare($childcare);
 
         $this->assertEquals($childcare, $this->event->getChildcare());
+    }
+
+    public function testBookingAvailabilityDefaultsToNull(): void
+    {
+        $this->assertNull($this->event->getBookingAvailability());
+    }
+
+    public function testBookingAvailabilityGetterAndSetter(): void
+    {
+        $bookingAvailability = new BookingAvailability();
+        $bookingAvailability->setType(Availability::Available);
+        $bookingAvailability->setWaitingListUrl('https://uitverkocht.be');
+
+        $this->event->setBookingAvailability($bookingAvailability);
+
+        $this->assertEquals($bookingAvailability, $this->event->getBookingAvailability());
     }
 
     public function testGetBirthdateRangeMethod(): void

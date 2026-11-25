@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace CultuurNet\SearchV3\Serializer;
 
+use CultuurNet\SearchV3\Enum\Availability;
 use CultuurNet\SearchV3\ValueObjects\Address;
 use CultuurNet\SearchV3\ValueObjects\Audience;
 use CultuurNet\SearchV3\ValueObjects\BirthdateRange;
+use CultuurNet\SearchV3\ValueObjects\BookingAvailability;
 use CultuurNet\SearchV3\ValueObjects\Childcare;
 use CultuurNet\SearchV3\ValueObjects\CalendarSummary;
 use CultuurNet\SearchV3\ValueObjects\Collection;
@@ -183,6 +185,10 @@ final class SerializerTest extends TestCase
 
         $subEvent1 = new Event();
         $subEvent1->setStatus(new Status('Available'));
+        $subEvent1BookingAvailability = new BookingAvailability();
+        $subEvent1BookingAvailability->setType(Availability::Available);
+        $subEvent1BookingAvailability->setWaitingListUrl('https://uitverkocht.be');
+        $subEvent1->setBookingAvailability($subEvent1BookingAvailability);
         $subEvent1->setStartDate(new \DateTime('2021-01-21T23:00:00+00:00'));
         $subEvent1->setEndDate(new \DateTime('2021-01-22T22:59:59+00:00'));
         $subEvent1->setHasOvernightStay(true);

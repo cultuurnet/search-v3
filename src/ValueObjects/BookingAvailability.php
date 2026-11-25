@@ -10,6 +10,11 @@ final class BookingAvailability
 {
     private Availability $type;
 
+    /**
+     * Only present on sub events.
+     */
+    private ?string $waitingListUrl = null;
+
     public function getType(): ?Availability
     {
         return $this->type;
@@ -20,4 +25,13 @@ final class BookingAvailability
         $this->type = $type;
     }
 
+    public function getWaitingListUrl(): ?string
+    {
+        return $this->waitingListUrl;
+    }
+
+    public function setWaitingListUrl(?string $waitingListUrl): void
+    {
+        $this->waitingListUrl = $waitingListUrl;
+    }
 }

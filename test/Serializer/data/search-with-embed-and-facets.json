@@ -111,6 +111,10 @@
           "status": {
             "type": "Available"
           },
+          "bookingAvailability": {
+            "type": "Available",
+            "waitingListUrl": "https://uitverkocht.be"
+          },
           "startDate": "2021-01-21T23:00:00+00:00",
           "endDate": "2021-01-22T22:59:59+00:00",
           "hasOvernightStay": true,
