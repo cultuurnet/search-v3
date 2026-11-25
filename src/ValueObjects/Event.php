@@ -84,6 +84,13 @@ final class Event extends Offer
      */
     private $childcare;
 
+    /**
+     * Booking availability. The waitingListUrl is only present on sub events.
+     * @var BookingAvailability|null
+     * @Type("CultuurNet\SearchV3\ValueObjects\BookingAvailability")
+     */
+    private $bookingAvailability;
+
     public function getLocation(): ?Place
     {
         return $this->location;
@@ -220,6 +227,16 @@ final class Event extends Offer
     public function setChildcare(Childcare $childcare): void
     {
         $this->childcare = $childcare;
+    }
+
+    public function getBookingAvailability(): ?BookingAvailability
+    {
+        return $this->bookingAvailability;
+    }
+
+    public function setBookingAvailability(BookingAvailability $bookingAvailability): void
+    {
+        $this->bookingAvailability = $bookingAvailability;
     }
 
     public function isAttendanceModeOnline(): bool
