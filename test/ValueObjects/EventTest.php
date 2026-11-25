@@ -107,6 +107,20 @@ final class EventTest extends TestCase
         $this->assertEquals($childcare, $this->event->getChildcare());
     }
 
+    public function testBookingAvailabilityDefaultsToNull(): void
+    {
+        $this->assertNull($this->event->getBookingAvailability());
+    }
+
+    public function testBookingAvailabilityGetterAndSetter(): void
+    {
+        $bookingAvailability = new BookingAvailability('Available', 'https://uitverkocht.be');
+
+        $this->event->setBookingAvailability($bookingAvailability);
+
+        $this->assertEquals($bookingAvailability, $this->event->getBookingAvailability());
+    }
+
     public function testGetBirthdateRangeMethod(): void
     {
         $birthdateRange = new BirthdateRange('2021-09-18', '2022-09-17');
